@@ -1,0 +1,5 @@
+.post_save #icon {
+  font-size: 1.7rem !important;
+  font-weight: 100;
+  cursor: pointer;
+}

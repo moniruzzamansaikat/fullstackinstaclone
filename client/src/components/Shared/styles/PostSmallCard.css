@@ -1,0 +1,48 @@
+.post_small_card {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 300px;
+  min-width: 300px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 3px 8px 23px -1px rgba(0, 0, 0, 0.33);
+  position: relative;
+  cursor: pointer;
+}
+
+.post_small_card:hover .overlay {
+  display: grid;
+}
+
+.post_small_card img {
+  width: 100%;
+}
+
+.post_small_card .overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  place-items: center;
+  display: none;
+  transition: 1s ease-in;
+}
+
+.post_small_card .overlay > div {
+  display: flex;
+}
+
+.post_small_card .overlay p {
+  color: #fff;
+  display: flex;
+  margin: 0 1rem;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.post_small_card .overlay #icon {
+  color: #fff;
+  margin-right: 5px;
+}

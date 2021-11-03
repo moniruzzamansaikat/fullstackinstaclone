@@ -1,0 +1,5 @@
+.profile_posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 1.3rem 0;
+}

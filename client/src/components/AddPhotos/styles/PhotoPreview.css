@@ -1,0 +1,43 @@
+.photo_preview {
+  min-height: 120px;
+  width: 80px;
+  min-width: 80px;
+  margin: 10px;
+  display: grid;
+  place-items: center;
+  color: #868686;
+  background-color: #fff;
+  border-radius: 5px;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: fill;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  border: 0;
+}
+
+.photo_preview:first-child {
+  margin-left: 0;
+}
+
+.photo_preview .cross_button {
+  background-color: #868686;
+  color: #fff;
+  height: 20px;
+  width: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 8px;
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  display: none;
+  transition: 1s ease-in-out;
+}
+
+.photo_preview:hover .cross_button {
+  display: grid;
+}

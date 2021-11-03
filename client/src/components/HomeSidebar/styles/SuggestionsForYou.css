@@ -1,0 +1,9 @@
+.suggestions_for_you {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0;
+}
+
+.suggestions_for_you h3 {
+  margin: 0;
+}

@@ -1,0 +1,21 @@
+.story {
+  height: 60px;
+  width: 60px;
+  margin: 0 4px;
+  color: #f0f0f0;
+  border-radius: 50%;
+  border: 2px solid tomato;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.story:first-child {
+  margin-left: 0;
+}
+
+.story + small {
+  display: block;
+  text-align: center;
+  margin-left: -20px;
+}

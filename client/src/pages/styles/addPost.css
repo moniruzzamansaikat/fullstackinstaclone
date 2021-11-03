@@ -1,0 +1,42 @@
+.write_desc {
+  padding: 10px 1rem;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 1rem 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.write_desc label {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.write_desc textarea {
+  width: 100%;
+  outline: 0;
+  padding: 10px;
+  resize: vertical;
+  border: 2px solid #cacaca;
+  border-radius: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.write_desc textarea:focus {
+  border: 2px solid #4d9bf3;
+}
+
+.success_msg {
+  color: #f2f2f2;
+  font-weight: 400;
+  letter-spacing: 1px;
+  padding: 8px 10px;
+  background: #49e849;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.success_msg span {
+  cursor: pointer;
+}

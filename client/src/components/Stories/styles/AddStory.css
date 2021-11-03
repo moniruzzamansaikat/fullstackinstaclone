@@ -1,0 +1,11 @@
+.add_story {
+  height: 62px;
+  width: 62px;
+  margin: 0 4px;
+  color: #666666;
+  border-radius: 50%;
+  background-color: rgba(204, 204, 204, 0.897);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}

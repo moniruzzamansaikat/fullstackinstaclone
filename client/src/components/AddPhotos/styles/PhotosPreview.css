@@ -1,0 +1,4 @@
+.photos_preview {
+  display: flex;
+  flex-wrap: wrap;
+}

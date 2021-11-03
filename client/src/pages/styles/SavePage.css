@@ -1,0 +1,6 @@
+.save_page {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1.3rem;
+  margin-bottom: 2rem;
+}

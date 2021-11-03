@@ -1,0 +1,14 @@
+.home_page {
+  display: grid;
+  grid-template-columns: 65% 35%;
+}
+
+@media (max-width: 768px) {
+  .home_page {
+    display: block;
+  }
+
+  #home_main_container {
+    width: 100%;
+  }
+}

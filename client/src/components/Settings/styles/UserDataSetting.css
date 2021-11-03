@@ -1,0 +1,50 @@
+.user_data_setting {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #dfdfdf;
+}
+
+.user_data_setting .input_div {
+  margin: 1rem 0;
+}
+
+.user_data_setting .input_div label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.user_data_setting .input_div input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid #dfdfdf;
+  border-radius: 4px;
+  outline: 0;
+}
+
+.user_data_setting .input_div input:focus {
+  border: 2px solid #2e9ddd;
+}
+
+.user_data_setting input[type="file"] {
+  display: none;
+}
+
+.user_data_setting #photo_up_design {
+  width: 100%;
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  color: #888888;
+  padding: 5px;
+  border: 1px solid rgb(207, 207, 207);
+  cursor: pointer;
+}
+
+.user_data_setting .img_preview {
+  width: 100px;
+  height: 100px;
+}

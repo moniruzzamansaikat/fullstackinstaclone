@@ -1,0 +1,34 @@
+.user_card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 3px 8px 23px -1px rgba(0, 0, 0, 0.33);
+  margin: 1rem 0;
+}
+
+.user_card img {
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 50%;
+  margin-right: 10px;
+  align-self: flex-start;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.user_card .user_info {
+  display: flex;
+  align-items: center;
+}
+
+.user_card .user_info a {
+  text-decoration: none;
+}
+
+.user_card .user_info p {
+  margin-top: 0;
+  color: gray;
+}

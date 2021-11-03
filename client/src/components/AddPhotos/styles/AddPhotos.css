@@ -1,0 +1,7 @@
+.add_photos {
+  display: flex;
+}
+
+.add_photos > div:not(:first-child) {
+  margin: 0 10px;
+}
