@@ -52,8 +52,7 @@ function PostPage() {
           <section className="footer">
             <div className="icons">
               <div>
-                <PostLike noText={true} post={post} user={user} />
-                <FaRegComment id="icon" />
+                <PostLike post={post} user={user} />
               </div>
               <PostSave post={post} />
             </div>

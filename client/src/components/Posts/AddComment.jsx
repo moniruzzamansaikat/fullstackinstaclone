@@ -19,7 +19,7 @@ function AddComment({ postId }) {
         onChange={(e) => setText(e.target.value)}
         value={text}
       />
-      <button>Add Comment</button>
+      <button className="btn">Add Comment</button>
     </form>
   );
 }

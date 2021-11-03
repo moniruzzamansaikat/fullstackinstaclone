@@ -9,7 +9,7 @@ function PostSmallCard({ post }) {
     <Link
       to={`/posts/${post._id}`}
       className="post_small_card"
-      style={{ backgroundImage: `url(${post.photos[0].url})` }}
+      style={{ backgroundImage: `url(${post?.photos[0]?.url})` }}
     >
       <div className="overlay">
         <div>

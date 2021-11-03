@@ -129,12 +129,13 @@ router.put("/:id/dislike", checkAuth, async (req, res) => {
 // get all comments
 router.get("/:id/comments", checkAuth, async () => {
   const postId = req.params.id;
-  const comments = await Post.findById(postId).select("comments");
-  console.log(comments);
-  res.json(comments);
+  const post = await Post.findById(postId).select("comments");
+  if (post) return res.json(post.comments);
+  res.json([]);
 });
 
 // add comment
+
 router.post("/:id/comments", checkAuth, async (req, res) => {
   const postId = req.params.id;
   const { text } = req.body;
@@ -156,9 +157,10 @@ router.post("/:id/comments", checkAuth, async (req, res) => {
     { new: true }
   )
     .select("comments")
-    .populate("comments.user");
+    .populate({ path: "comments.user", select: "name email photo _id" });
 
-  res.json(post);
+  if (post) return res.json(post.comments);
+  res.json([]);
 });
 
 // save post new post
@@ -174,10 +176,7 @@ router.post("/:id/save", checkAuth, async (req, res) => {
     { new: true }
   );
 
-  const token = getToken(updatedUser);
-  res.json({
-    token,
-  });
+  res.json(postId);
 });
 
 // remove from saved
@@ -193,10 +192,7 @@ router.delete("/:id/save", checkAuth, async (req, res) => {
     { new: true }
   );
 
-  const token = getToken(updatedUser);
-  res.json({
-    token,
-  });
+  res.json(postId);
 });
 
 module.exports = router;

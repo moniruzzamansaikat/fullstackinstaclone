@@ -8,12 +8,20 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .post_page {
+    grid-template-columns: 1fr;
+    height: 100%;
+  }
+}
+
 .post_page .post_details {
   display: flex;
   flex-direction: column;
 }
 
 .post_page .img_div {
+  height: 500px;
   background-position: center;
   background-size: cover;
 }

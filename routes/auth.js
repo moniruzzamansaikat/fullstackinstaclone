@@ -4,6 +4,12 @@ const { checkAuth } = require("../utils/checkAuth");
 const { uploadSingle } = require("../utils/files");
 const { getToken } = require("../utils/jwt");
 
+// check auth
+router.get("/check", checkAuth, async (req, res) => {
+  const user = await User.findById(req.userId);
+  res.json(user);
+});
+
 // register
 router.post("/register", async (req, res) => {
   const errors = [];
@@ -54,7 +60,7 @@ router.post("/login", async (req, res) => {
 
   // all is ok : login now
   if (errors.length === 0) {
-    const token = getToken(userWithEmail);
+    const token = getToken({ _id: userWithEmail._id });
     return res.json({ token, user: userWithEmail });
   } else {
     return res.status(400).json({ errors });

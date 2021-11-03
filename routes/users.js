@@ -48,10 +48,7 @@ router.post("/follow", checkAuth, async (req, res) => {
     user: req.userId,
   });
 
-  const data = {
-    token: getToken(currentUser),
-  };
-  res.json(data);
+  res.json(userId);
 });
 
 // unfollow people
@@ -76,10 +73,7 @@ router.post("/unfollow", checkAuth, async (req, res) => {
     },
   });
 
-  const data = {
-    token: getToken(currentUser),
-  };
-  res.json(data);
+  res.json(userId);
 });
 
 // fetch followers

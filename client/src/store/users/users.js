@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authRequest } from "../../utils/xhr";
-import { setToken } from "../auth/auth";
+import { addFollowId, removeFollowId, setToken } from "../auth/auth";
 
 const initialState = {
   users: [],
@@ -89,7 +89,7 @@ export const followPeople = createAsyncThunk(
         }
       );
 
-      dispatch(setToken(data.token));
+      dispatch(addFollowId(data));
     } catch (error) {
       const { data: reason } = error.response;
       console.log(reason);
@@ -109,7 +109,7 @@ export const unfollowPeople = createAsyncThunk(
           data: { userId },
         }
       );
-      dispatch(setToken(data.token));
+      dispatch(removeFollowId(data));
     } catch (error) {
       const { data: reason } = error.response;
       console.log(reason);

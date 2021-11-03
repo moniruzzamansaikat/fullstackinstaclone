@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import image from "../../images/user_default.png";
 import { Link } from "react-router-dom";
 import "./styles/ProfileHeader.css";
@@ -38,4 +38,4 @@ function ProfileHeader({ user, mainUser }) {
   );
 }
 
-export default ProfileHeader;
+export default memo(ProfileHeader);

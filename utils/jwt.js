@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
  * @returns String
  */
 exports.getToken = function (object) {
-  return jwt.sign(object.toJSON(), process.env.JWT_SECRET, {
+  return jwt.sign(object, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 };

@@ -4,8 +4,10 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import PostImage from "./PostImage";
 import PostItemHeader from "./PostItemHeader";
 import PostLike from "./PostLike";
-import "./styles/PostItem.css";
 import PostSave from "./PostSave";
+import { Link } from "react-router-dom";
+import TimeAgo from "../Shared/TimeAgo";
+import "./styles/PostItem.css";
 
 function PostItem({ post }) {
   const { user } = useSelector((state) => state.auth);
@@ -35,7 +37,15 @@ function PostItem({ post }) {
         <PostSave post={post} />
       </div>
 
-      <div style={{ padding: "1rem" }}>{post?.text}</div>
+      <div style={{ padding: "1rem" }}>
+        <p>
+          <Link to={`/profile/${post?.user?._id}`} className="custom_link">
+            {post?.user?.name}
+          </Link>{" "}
+          {post?.text}
+        </p>
+        <TimeAgo time={post?.createdAt} />
+      </div>
 
       {index > 0 ? (
         <div className="trigger left" onClick={handlePrev}>

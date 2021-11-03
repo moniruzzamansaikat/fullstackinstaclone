@@ -72,8 +72,7 @@ export const savePost = createAsyncThunk(
           method: "POST",
         }
       );
-      console.log(data);
-      dispatch(setToken(data.token));
+      return data;
     } catch (error) {
       const { data: reason } = error.response;
       console.log(reason);
@@ -91,7 +90,7 @@ export const removeFromSaved = createAsyncThunk(
           method: "DELETE",
         }
       );
-      dispatch(setToken(data.token));
+      return data;
     } catch (error) {
       const { data: reason } = error.response;
       console.log(reason);
@@ -165,45 +164,6 @@ export const deletePost = createAsyncThunk(
   }
 );
 
-// like post
-export const likePost = createAsyncThunk(
-  "posts/likePost",
-  async (postId, { dispatch, getState }) => {
-    try {
-      const { data } = await authRequest(getState().auth.token)(
-        `/posts/${postId}/like`,
-        {
-          method: "PUT",
-        }
-      );
-      dispatch(setLikePost({ postId, ...data }));
-    } catch (error) {
-      const { data: reason } = error.response;
-      console.log(reason);
-    }
-  }
-);
-
-// dislike post
-export const dislikePost = createAsyncThunk(
-  "posts/dislikePost",
-  async (postId, { dispatch, getState }) => {
-    try {
-      const { data } = await authRequest(getState().auth.token)(
-        `/posts/${postId}/dislike`,
-        {
-          method: "PUT",
-        }
-      );
-
-      dispatch(setDislikePost({ postId, ...data }));
-    } catch (error) {
-      const { data: reason } = error.response;
-      console.log(reason);
-    }
-  }
-);
-
 // main slice
 const posts = createSlice({
   name: "posts",
@@ -242,19 +202,28 @@ const posts = createSlice({
     },
 
     setLikePost: (state, { payload }) => {
-      state.posts = state.posts.map((post) => {
-        if (post._id === payload.postId) post.likes.push(payload);
-
-        return post;
-      });
+      if (payload.postId === state.singlePost._id) {
+        state.singlePost.likes.push(payload);
+      } else {
+        state.posts = state.posts.map((post) => {
+          if (post._id === payload.postId) post.likes.push(payload);
+          return post;
+        });
+      }
     },
 
     setDislikePost: (state, { payload }) => {
-      state.posts = state.posts.map((post) => {
-        if (post._id === payload.postId)
-          post.likes = post.likes.filter((like) => like._id !== payload._id);
-        return post;
-      });
+      if (payload.postId === state.singlePost._id) {
+        state.singlePost.likes = state.singlePost.likes.filter(
+          (like) => like._id !== payload._id
+        );
+      } else {
+        state.posts = state.posts.map((post) => {
+          if (post._id === payload.postId)
+            post.likes = post.likes.filter((like) => like._id !== payload._id);
+          return post;
+        });
+      }
     },
   },
 

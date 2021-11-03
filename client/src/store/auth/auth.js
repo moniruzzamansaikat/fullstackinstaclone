@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 const initialState = {
   token: localStorage.getItem("jwt_token"),
   user: null,
+  fetchingUser: false,
   updatingUserData: false,
   notifications: [],
 };
@@ -96,6 +97,24 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+// check authentication
+export const checkAuthenticatinon = createAsyncThunk(
+  "auth/checkAuthenticatinon",
+  async (token, { dispatch, getState }) => {
+    dispatch(setFetchingUser(true));
+
+    try {
+      const { data } = await authRequest(token)("/auth/check");
+      dispatch(setUser(data));
+      dispatch(setFetchingUser(false));
+    } catch (error) {
+      const { data: reason } = error.response;
+      dispatch(setFetchingUser(false));
+      console.log(reason);
+    }
+  }
+);
+
 // MAIN SLICE
 const auth = createSlice({
   name: "auth",
@@ -103,6 +122,10 @@ const auth = createSlice({
   reducers: {
     removeToken: () => {
       localStorage.removeItem("jwt_token");
+    },
+
+    setFetchingUser: (state, { payload }) => {
+      state.fetchingUser = payload;
     },
 
     setToken: (state, { payload }) => {
@@ -128,14 +151,14 @@ const auth = createSlice({
       state.notifications = payload;
     },
 
-    authCheck: (state) => {
-      if (state.token) {
-        const data = jwtDecode(state.token);
+    addFollowId: (state, { payload }) => {
+      state.user.following = [...state.user.following, payload];
+    },
 
-        if (data) {
-          state.user = data;
-        }
-      }
+    removeFollowId: (state, { payload }) => {
+      state.user.following = state.user.following.filter(
+        (follow) => follow !== payload
+      );
     },
   },
 });
@@ -144,9 +167,11 @@ export const {
   setToken,
   setUser,
   removeToken,
-  authCheck,
   logoutUser,
+  setFetchingUser,
   setNotifications,
   setUpdatingUserData,
+  addFollowId,
+  removeFollowId,
 } = auth.actions;
 export default auth.reducer;

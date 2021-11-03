@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DropDownMenu from "./components/Shared/DropDownMenu";
 import PrivatePage from "./pages/PrivatePage";
 import { useEffect } from "react";
-import { authCheck } from "./store/auth/auth";
+import { authCheck, checkAuthenticatinon } from "./store/auth/auth";
 import Meta from "./components/Meta";
 import "./App.css";
 
@@ -13,10 +13,10 @@ function App() {
   const dispatch = useDispatch();
   const { uploadingPhotos } = useSelector((state) => state.photos);
   const { openDropdownMenu } = useSelector((state) => state.posts);
-  const { user, token } = useSelector((state) => state.auth);
+  const { user, token, fetchingUser } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(authCheck());
+    dispatch(checkAuthenticatinon(token));
   }, [token, dispatch]);
 
   return (

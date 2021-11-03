@@ -1,4 +1,10 @@
-import { fetchProfilePosts, fetchSavedPosts, fetchSinglePost } from "./posts";
+import {
+  fetchProfilePosts,
+  fetchSavedPosts,
+  fetchSinglePost,
+  savePost,
+  removeFromSaved,
+} from "./posts";
 import { addComment } from "./comment";
 
 const postsExtraReducers = (builder) => {
@@ -14,6 +20,14 @@ const postsExtraReducers = (builder) => {
     })
     .addCase(addComment.fulfilled, (state, { payload }) => {
       state.singlePost.comments = payload;
+    })
+    .addCase(savePost.fulfilled, (state, { payload }) => {
+      state.savedPosts = [...state.savedPosts, payload];
+    })
+    .addCase(removeFromSaved.fulfilled, (state, { payload }) => {
+      state.savedPosts = state.savedPosts.filter(
+        (post) => post._id !== payload
+      );
     });
 };
 
