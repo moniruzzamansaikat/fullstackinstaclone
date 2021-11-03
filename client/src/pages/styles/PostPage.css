@@ -26,14 +26,17 @@
   border-bottom: 1px solid rgb(207, 207, 207);
 }
 
+.post_page .post_details header a {
+  margin-left: 10px;
+}
+
 .post_page .post_details header > div {
   display: flex;
   align-items: center;
 }
 
 .post_details .body {
-  min-height: 300px;
-  height: 300px;
+  flex: 10;
   overflow-y: scroll;
   display: flex;
 }
@@ -48,7 +51,6 @@
   color: #000;
   text-decoration: none;
   display: inline-block;
-  margin-left: 10px;
   font-weight: 600;
 }
 
@@ -69,8 +71,8 @@
   padding-left: 10px;
   display: flex;
   height: 100%;
+  max-height: 300px;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .post_details .pb p {
@@ -82,12 +84,15 @@
 }
 
 .post_details .footer {
+  background: rgb(206, 206, 206);
   border-top: 1px solid rgb(206, 206, 206);
 }
 
 .post_details .footer .icons {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .post_details .footer #icon {
@@ -101,22 +106,4 @@
 }
 .post_details .footer #icon:nth-child(2) {
   margin-top: -3px;
-}
-
-.post_details .footer .comment {
-  display: block;
-  margin-top: 10px;
-}
-
-.post_details .footer .comment input {
-  width: 100%;
-  padding: 8px 10px;
-  border: 0;
-  outline: 0;
-  border: 2px solid #cacaca;
-  border-radius: 2px;
-}
-
-.post_details .footer .comment input:focus {
-  border-color: turquoise;
 }

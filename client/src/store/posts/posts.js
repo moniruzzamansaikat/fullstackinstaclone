@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setToken } from "../auth/auth";
-import { authRequest, xhr } from "../../utils/xhr";
+import { authRequest } from "../../utils/xhr";
+import postsExtraReducers from "./postsExtraReducers";
 
 const initialState = {
   posts: [],
   profilePosts: [],
   savedPosts: [],
+  singlePost: null,
   openDropdownMenu: false,
   dropdownedPost: null,
   creatingPost: false,
@@ -35,6 +37,22 @@ export const fetchSavedPosts = createAsyncThunk(
   async (_, { getState }) => {
     try {
       const { data } = await authRequest(getState().auth.token)("/posts/save");
+      return data;
+    } catch (error) {
+      const { data: reason } = error.response;
+      console.log(reason);
+    }
+  }
+);
+
+// fetch single posts
+export const fetchSinglePost = createAsyncThunk(
+  "posts/fetchSinglePost",
+  async (postId, { getState }) => {
+    try {
+      const { data } = await authRequest(getState().auth.token)(
+        `/posts/${postId}`
+      );
       return data;
     } catch (error) {
       const { data: reason } = error.response;
@@ -240,15 +258,7 @@ const posts = createSlice({
     },
   },
 
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchSavedPosts.fulfilled, (state, { payload }) => {
-        state.savedPosts = payload;
-      })
-      .addCase(fetchProfilePosts.fulfilled, (state, { payload }) => {
-        state.profilePosts = payload;
-      });
-  },
+  extraReducers: postsExtraReducers,
 });
 
 export const {

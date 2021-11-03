@@ -3,7 +3,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { dislikePost, likePost } from "../../store/posts/posts";
 
-function PostLike({ post, user }) {
+function PostLike({ post, user, noText }) {
   const dispatch = useDispatch();
 
   const handlePostLike = () => dispatch(likePost(post._id));
@@ -15,13 +15,13 @@ function PostLike({ post, user }) {
   }, [post, user._id]);
 
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div style={{ display: noText ? "inline" : "flex", alignItems: "center" }}>
       {likedPost ? (
         <AiFillHeart id="icon" onClick={handlePostDislike} />
       ) : (
         <AiOutlineHeart id="icon" onClick={handlePostLike} />
       )}
-      <span>{post?.likes?.length} likes</span>
+      {!noText && <span>{post?.likes?.length} likes</span>}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { BsSave, BsSave2Fill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromSaved, savePost } from "../../store/posts/posts";

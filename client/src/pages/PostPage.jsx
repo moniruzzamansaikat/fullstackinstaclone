@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authRequest } from "../utils/xhr";
 import MainLayout from "../components/Layouts/MainLayout";
-import { BsThreeDots, BsHeart } from "react-icons/bs";
+import { BsThreeDots } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
+import AddComment from "../components/Posts/AddComment";
+import SingePostComment from "../components/Comment/SingePostComment";
+import PostSave from "../components/Posts/PostSave";
+import PostLike from "../components/Posts/PostLike";
 import "./styles/PostPage.css";
+import { fetchSinglePost } from "../store/posts/posts";
 
 function PostPage() {
-  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { singlePost: post } = useSelector((state) => state.posts);
   const { id: postId } = useParams();
-  const [post, setPost] = useState(null);
 
   useEffect(() => {
-    authRequest(token)(`/posts/${postId}`).then(({ data }) => {
-      setPost(data);
-    });
-  }, [postId, token]);
+    dispatch(fetchSinglePost(postId));
+  }, [dispatch, postId]);
 
   if (!post) return null;
 
@@ -38,21 +42,22 @@ function PostPage() {
           </header>
 
           <section className="body">
-            <img src={post?.user?.photo?.url} alt="" />
             <div className="pb">
-              <Link to={`/profile/${post?.user?._id}`}>{post?.user?.name}</Link>
-              <p>{post.text}</p>
+              {post.comments.map((comment) => (
+                <SingePostComment key={comment._id} comment={comment} />
+              ))}
             </div>
           </section>
 
           <section className="footer">
             <div className="icons">
-              <BsHeart id="icon" />
-              <FaRegComment id="icon" />
+              <div>
+                <PostLike noText={true} post={post} user={user} />
+                <FaRegComment id="icon" />
+              </div>
+              <PostSave post={post} />
             </div>
-            <div className="comment">
-              <input type="text" />
-            </div>
+            <AddComment postId={postId} />
           </section>
         </div>
       </div>

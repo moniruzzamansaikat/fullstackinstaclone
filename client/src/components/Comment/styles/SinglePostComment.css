@@ -1,0 +1,32 @@
+.comment_item {
+  display: flex;
+  margin: 8px 0;
+}
+
+.comment_item:first-child {
+  margin-top: 0;
+}
+
+.comment_item .comment_details {
+  margin-left: 10px;
+}
+
+.comment_item .d-flex a {
+  display: inline;
+  padding-right: 4px;
+  font-weight: 500;
+}
+
+.comment_item .d-flex p {
+  display: inline;
+}
+
+.comment_item small {
+  color: gray;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.comment_item small:first-child {
+  margin-left: 0;
+}

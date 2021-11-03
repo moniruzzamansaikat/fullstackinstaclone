@@ -1,0 +1,26 @@
+.add_comment {
+  display: flex;
+  margin-top: 4px;
+}
+
+.add_comment input {
+  flex: 12;
+  padding: 8px 10px;
+  border: 2px solid gray;
+  outline: 0;
+}
+
+.add_comment input:focus {
+  border-color: turquoise;
+}
+
+.add_comment button {
+  display: inline-block;
+  margin-left: 10px;
+  background: turquoise;
+  border: 0;
+  outline: 0;
+  color: #f0f0f0;
+  font-weight: 600;
+  cursor: pointer;
+}
