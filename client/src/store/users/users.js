@@ -7,12 +7,7 @@ const initialState = {
   following: [],
   followers: [],
   suggestedUsers: [],
-  messages: [
-    { id: 1, sent: false, text: "Hello Saikat" },
-    { id: 2, sent: true, text: "How are you doing" },
-    { id: 3, sent: true, text: "It's greate 😀" },
-    { id: 4, sent: false, text: "Love me like you dooo...." },
-  ],
+  messages: [],
   socket: null,
   fetchingSuggestedUsers: false,
   fetchingFollowers: false,
@@ -38,9 +33,11 @@ export const fetchInboxUser = createAsyncThunk(
 // fetch messages
 export const fetchMessages = createAsyncThunk(
   "users/fetchMessages",
-  async (userId, { getState }) => {
+  async ({ userId, receiverId }, { getState }) => {
     try {
-      const { data } = await authRequest(getState().auth.token)("/");
+      const { data } = await authRequest(getState().auth.token)(
+        `/messages?userId=${userId}&receiverId=${receiverId}`
+      );
       return data;
     } catch (error) {
       const { data: reason } = error.reponse;
@@ -208,6 +205,14 @@ const usersSlice = createSlice({
     setFetchingSuggestedUsers: (state, { payload }) => {
       state.fetchingSuggestedUsers = payload;
     },
+
+    setMessages: (state, { payload }) => {
+      state.messages = payload;
+    },
+
+    addMessage: (state, { payload }) => {
+      state.messages = [...state.messages, payload];
+    },
   },
 
   extraReducers: (builder) => {
@@ -252,5 +257,7 @@ export const {
   setFetchingFollowing,
   setFetchingSuggestedUsers,
   setSocket,
+  setMessages,
+  addMessage,
 } = usersSlice.actions;
 export default usersSlice.reducer;

@@ -6,13 +6,20 @@
 }
 
 .message_item .text {
-  padding: 10px;
-  border-radius: 10px;
-  background: rgb(46, 248, 113);
+  padding: 5px 1rem;
+  border-radius: 100px;
+  background: #d7d7d7;
   display: inline-block;
 }
 
 .message_item.sent {
   right: 0;
   justify-content: end;
+}
+
+.message_item img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
 }

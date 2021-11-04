@@ -1,20 +1,44 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "../../store/users/users";
 import MessageItem from "./MessageItem";
+import audio from "../../images/alert.wav";
 
-function Messages({ socket }) {
+function Messages({ inboxUser }) {
+  const { socket } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   const { messages } = useSelector((state) => state.users);
+  const { user } = useSelector((state) => state.auth);
+  const scrollRef = useRef();
+  const audioRef = useRef();
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const playAlert = () => {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    audioRef.current.play();
+  };
 
   useEffect(() => {
     socket.on("message", (data) => {
-      console.log(data);
+      dispatch(addMessage(data));
+      if (user?._id === data.sender) {
+        playAlert();
+      }
     });
-  }, [socket]);
+  }, [dispatch, socket, user]);
 
   return (
     <section>
+      <audio ref={audioRef} src={audio}></audio>
+
       {messages?.map((message) => (
-        <MessageItem key={message.id} message={message} />
+        <div ref={scrollRef} key={message._id}>
+          <MessageItem inboxUser={inboxUser} message={message} user={user} />
+        </div>
       ))}
     </section>
   );

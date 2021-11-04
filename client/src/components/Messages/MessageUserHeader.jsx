@@ -12,7 +12,7 @@ function MessageUserHeader({ user }) {
           <h4>{user?.name}</h4>
           <span className="ac-icon">
             <BsDot className="icon" />
-            <small>{user?.active ? "acitve" : "not active"}</small>
+            <small>acitve</small>
           </span>
         </div>
       </div>

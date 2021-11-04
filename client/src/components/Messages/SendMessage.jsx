@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles/SendMessage.css";
 
-function SendMessage({ socket, user, mainUser }) {
+function SendMessage({ socket, sender, receiverId }) {
   const [text, setText] = useState("");
 
   const handleSubmit = (e) => {
@@ -9,8 +9,8 @@ function SendMessage({ socket, user, mainUser }) {
 
     if (text.length > 0) {
       socket?.emit("chat", {
-        userId: mainUser?._id,
-        to: user?._id,
+        sender,
+        receiverId,
         text,
       });
       setText("");

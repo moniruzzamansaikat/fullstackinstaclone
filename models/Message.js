@@ -2,8 +2,8 @@ const { Schema, Types, model } = require("mongoose");
 const timestamp = require("mongoose-timestamp");
 
 const MessageSchema = new Schema({
-  userId: { type: Types.ObjectId, ref: "User" },
-  to: { type: Types.ObjectId, ref: "User" },
+  members: [{ type: String }],
+  sender: { type: String },
   text: { type: String, defalut: "" },
   seen: { type: Boolean, default: false },
 });

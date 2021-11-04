@@ -1,76 +1,81 @@
 const User = require("../models/User");
-let loggedinUsers = [];
+const Message = require("../models/Message");
+let usersList = [];
 
-const getSocketIdByUserId = (userId) => {
-  const found = loggedinUsers.find((user) => user.userId === userId);
-  if (found) {
-    return found.socketId;
-  }
+// add user
+const addUser = (userId, socketId) => {
+  !usersList.some((user) => user.userId === userId) &&
+    usersList.push({ userId, socketId });
+};
 
-  return null;
+// remove user
+const removeUser = (socketId) => {
+  usersList = usersList.filter((user) => user.socketId !== socketId);
+};
+
+const getUser = (userId) => {
+  return usersList.find((user) => user.userId === userId);
 };
 
 module.exports = function (io) {
-  io.of("/messages").on("connection", function (socket) {
-    socket.on("message", (text) => {
-      socket.broadcast.emit("message", text);
+  io.on("connection", function (socket) {
+    // get active users
+    getActiveUsers(usersList, (users) => {
+      io.emit("active_users", users);
     });
 
-    // handle close conenctsion
-    socket.on("disconnect", () => {
-      const closedUserId = loggedinUsers.find(
-        (user) => user.socketId !== socket.id
-      );
+    // connect user
+    socket.on("connect_user", (userId) => {
+      addUser(userId, socket.id);
 
-      // make in active user
-      if (closedUserId) {
-        console.log(closedUserId);
-        User.findByIdAndUpdate(
-          closedUserId.userId,
-          {
-            $set: {
-              active: true,
-            },
-          },
-          { new: true }
-        ).then((user) => {
-          console.log(user);
-        });
-      }
-
-      loggedinUsers = loggedinUsers.filter(
-        (item) => item.socketId !== socket.id
-      );
-      console.log(loggedinUsers);
-    });
-
-    // connect user on login
-    socket.on("connect_user", (user) => {
-      User.findByIdAndUpdate(
-        user._id,
-        {
-          $set: {
-            active: false,
-          },
-        },
-        { new: true }
-      ).then((user) => console.log("user connected: " + user));
-
-      loggedinUsers.push({
-        socketId: socket.id,
-        userId: user?._id,
+      // get active users
+      getActiveUsers(usersList, (users) => {
+        io.emit("active_users", users);
       });
-      console.log(loggedinUsers);
+    });
+
+    // disconnect user
+    socket.on("disconnect", () => {
+      removeUser(socket.id);
+
+      // get active users
+      getActiveUsers(usersList, (users) => {
+        io.emit("active_users", users);
+      });
     });
 
     // chat
-    socket.on("chat", (data) => {
-      console.log(data);
-      const socketId = getSocketIdByUserId(data.userId);
-      console.log({ socketId });
-      if (socketId) {
-        socket.to(socketId).emit("message", data);
+    socket.on("chat", ({ sender, receiverId, text }) => {
+      const user = getUser(receiverId);
+      const senderUser = getUser(sender);
+
+      if (user) {
+        createMessage(
+          {
+            sender,
+            members: [receiverId, sender],
+            text,
+          },
+          (message) => {
+            io.to(senderUser.socketId).emit("message", message);
+            io.to(user.socketId).emit("message", message);
+          }
+        );
       }
     });
   });
 };
+
+// get active users from database
+function getActiveUsers(usersList, cb) {
+  const ids = usersList.map((user) => user.userId);
+
+  User.find({ _id: { $in: ids } }).then((users) => {
+    cb(users);
+  });
+}
+
+// create mesage
+function createMessage(obj, cb) {
+  Message.create(obj).then((msg) => cb(msg));
+}

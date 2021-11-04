@@ -24,9 +24,9 @@ const server = app.listen(PORT, () => {
   require("./utils/db");
 });
 
-const io = new Server(server, {
+const io = new Server(8888, {
   cors: {
-    origin: "*",
+    origin: "http://localhost:3000",
   },
 });
 require("./utils/messages")(io);

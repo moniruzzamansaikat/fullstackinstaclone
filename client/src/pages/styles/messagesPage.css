@@ -15,4 +15,12 @@
 
 .messages_page .message_container section {
   flex: 12;
+  max-height: 385px;
+  overflow-y: scroll;
+}
+
+.messages_page .empty_chat {
+  display: grid;
+  place-items: center;
+  border-left: 1px solid;
 }

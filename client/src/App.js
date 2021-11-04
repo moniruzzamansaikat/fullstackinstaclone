@@ -9,8 +9,8 @@ import { checkAuthenticatinon } from "./store/auth/auth";
 import Meta from "./components/Meta";
 import MainLoader from "./components/Shared/MainLoader";
 import io from "socket.io-client";
-import "./App.css";
 import { setSocket } from "./store/users/users";
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,8 +24,8 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      const socket = io.connect("http://localhost:5000/messages");
-      socket.emit("connect_user", user);
+      const socket = io.connect("ws://localhost:8888");
+      socket.emit("connect_user", user?._id);
       dispatch(setSocket(socket));
     }
   }, [dispatch, user]);
