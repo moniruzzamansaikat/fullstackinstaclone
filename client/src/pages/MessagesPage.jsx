@@ -6,6 +6,7 @@ import {
   fetchFollowing,
   fetchInboxUser,
   fetchMessages,
+  setActiveUsers,
 } from "../store/users/users";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import Messages from "../components/Messages/Messages";
@@ -18,14 +19,15 @@ function MessagesPage() {
   const history = useHistory();
   const location = useLocation();
   const params = useParams();
-  const [activeUsers, setActiveUsers] = useState([]);
-  const { inboxUser, socket } = useSelector((state) => state.users);
+  const { inboxUser, socket, activeUsers } = useSelector(
+    (state) => state.users
+  );
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     socket?.on("active_users", (users) => {
-      setActiveUsers(users);
+      dispatch(setActiveUsers(users));
     });
-  }, [socket, location, params]);
+  }, [dispatch, socket, location, params]);
 
   useEffect(() => {
     dispatch(fetchFollowing(user?._id));
@@ -52,7 +54,8 @@ function MessagesPage() {
           </header>
           <section className="users">
             {activeUsers
-              ?.filter((u) => u?._id !== user?._id)
+              .filter((u) => u._id !== user?._id)
+              .filter((u) => user?.following?.includes(u._id))
               .map((user) => (
                 <UserCard
                   inHeader
@@ -65,7 +68,7 @@ function MessagesPage() {
           </section>
         </div>
 
-        {inboxUser ? (
+        {params?.userId ? (
           <div className="message_container">
             <MessageUserHeader user={inboxUser} />
             <Messages inboxUser={inboxUser} socket={socket} />

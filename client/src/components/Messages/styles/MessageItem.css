@@ -7,9 +7,10 @@
 
 .message_item .text {
   padding: 5px 1rem;
-  border-radius: 100px;
+  border-radius: 30px;
   background: #d7d7d7;
   display: inline-block;
+  word-break: break-all;
 }
 
 .message_item.sent {

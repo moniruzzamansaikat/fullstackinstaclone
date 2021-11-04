@@ -11,21 +11,24 @@ function Messages({ inboxUser }) {
   const { user } = useSelector((state) => state.auth);
   const scrollRef = useRef();
   const audioRef = useRef();
+  let cnt = 0;
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const playAlert = () => {
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
-    audioRef.current.play();
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    }
   };
 
   useEffect(() => {
     socket.on("message", (data) => {
       dispatch(addMessage(data));
-      if (user?._id === data.sender) {
+      if (user?._id !== data.sender) {
         playAlert();
       }
     });
@@ -35,11 +38,13 @@ function Messages({ inboxUser }) {
     <section>
       <audio ref={audioRef} src={audio}></audio>
 
-      {messages?.map((message) => (
-        <div ref={scrollRef} key={message._id}>
-          <MessageItem inboxUser={inboxUser} message={message} user={user} />
-        </div>
-      ))}
+      {messages
+        .filter((msg) => msg.members.includes(inboxUser?._id))
+        ?.map((message) => (
+          <div ref={scrollRef} key={message._id}>
+            <MessageItem inboxUser={inboxUser} message={message} user={user} />
+          </div>
+        ))}
     </section>
   );
 }

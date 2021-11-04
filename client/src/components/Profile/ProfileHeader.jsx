@@ -22,8 +22,26 @@ function ProfileHeader({ user, mainUser }) {
               Setting
             </Link>
           ) : (
-            <div style={{ display: "flex" }}>
-              <FollowButton user={user} />
+            <div>
+              <div style={{ display: "flex" }}>
+                <FollowButton user={user} />
+
+                {/* if following show message link */}
+                {/* {user?.following?.includes(mainUser?._id) && (
+                  <Link
+                    className="btn"
+                    to={`/messages/t/${user?._id}`}
+                    style={{
+                      fontSize: "12px",
+                      display: "inline-block",
+                      marginLeft: "10px",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Message
+                  </Link>
+                )} */}
+              </div>
             </div>
           )}
           <p className="links">

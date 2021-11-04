@@ -8,13 +8,14 @@ const { getToken } = require("../utils/jwt");
 
 // get
 router.get("/", checkAuth, async (req, res) => {
-  const posts = await Post.find({}, null, {
+  let posts = await Post.find({}, null, {
     sort: { createdAt: -1 },
   })
-    .populate({ path: "user", select: "name _id photo" })
+    .populate({ path: "user", select: "name _id photo followers" })
     .populate({ path: "comments.user", select: "name photo" })
     .populate({ path: "likes", select: "_id name" });
 
+  posts = posts.filter((post) => post.user.followers.includes(req.userId));
   res.json(posts);
 });
 

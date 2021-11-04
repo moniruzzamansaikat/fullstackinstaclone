@@ -7,6 +7,7 @@ const initialState = {
   following: [],
   followers: [],
   suggestedUsers: [],
+  activeUsers: [],
   messages: [],
   socket: null,
   fetchingSuggestedUsers: false,
@@ -211,7 +212,11 @@ const usersSlice = createSlice({
     },
 
     addMessage: (state, { payload }) => {
-      state.messages = [...state.messages, payload];
+      state.messages.push(payload);
+    },
+
+    setActiveUsers: (state, { payload }) => {
+      state.activeUsers = payload;
     },
   },
 
@@ -259,5 +264,6 @@ export const {
   setSocket,
   setMessages,
   addMessage,
+  setActiveUsers,
 } = usersSlice.actions;
 export default usersSlice.reducer;
