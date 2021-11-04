@@ -16,7 +16,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (user) {
-      history.push(from);
+      history.replace(from);
     }
   }, [user, from, history]);
 

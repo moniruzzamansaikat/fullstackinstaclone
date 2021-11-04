@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authRequest, xhr } from "../../utils/xhr";
-import jwtDecode from "jwt-decode";
 
 const initialState = {
   token: localStorage.getItem("jwt_token"),
@@ -109,8 +108,8 @@ export const checkAuthenticatinon = createAsyncThunk(
       dispatch(setFetchingUser(false));
     } catch (error) {
       const { data: reason } = error.response;
-      dispatch(setFetchingUser(false));
       console.log(reason);
+      dispatch(setFetchingUser(false));
     }
   }
 );
@@ -126,6 +125,14 @@ const auth = createSlice({
 
     setFetchingUser: (state, { payload }) => {
       state.fetchingUser = payload;
+    },
+
+    addSavedPost: (state, { payload }) => {
+      state.user.saved = [...state.user.saved, payload];
+    },
+
+    removeSavedPost: (state, { payload }) => {
+      state.user.saved = state.user.saved.filter((f) => f !== payload);
     },
 
     setToken: (state, { payload }) => {
@@ -172,6 +179,8 @@ export const {
   setNotifications,
   setUpdatingUserData,
   addFollowId,
+  addSavedPost,
+  removeSavedPost,
   removeFollowId,
 } = auth.actions;
 export default auth.reducer;

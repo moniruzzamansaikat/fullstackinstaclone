@@ -1,0 +1,24 @@
+.messages_page .send_message form {
+  display: flex;
+}
+
+.messages_page .send_message input {
+  flex: 12;
+  padding: 8px;
+  border: 0;
+  outline: 0;
+  border: 2px solid rgb(197, 197, 197);
+}
+
+.messages_page .send_message input:focus {
+  border-color: var(--primary-color);
+}
+
+.messages_page .send_message button {
+  background: var(--primary-color);
+  color: #f0f0f0;
+  border: 0;
+  outline: 0;
+  margin-left: 5px;
+  width: 100px;
+}

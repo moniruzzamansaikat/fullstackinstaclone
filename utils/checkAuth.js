@@ -14,7 +14,10 @@ exports.checkAuth = (req, res, next) => {
   }
 
   const decoded = jwt.decode(token);
-  if (decoded) req.userId = decoded._id;
+
+  if (decoded) {
+    req.userId = decoded._id;
+  }
 
   next();
 };

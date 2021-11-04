@@ -1,0 +1,18 @@
+.message_item {
+  position: relative;
+  right: 0;
+  margin: 10px 0;
+  display: flex;
+}
+
+.message_item .text {
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(46, 248, 113);
+  display: inline-block;
+}
+
+.message_item.sent {
+  right: 0;
+  justify-content: end;
+}

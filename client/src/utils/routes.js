@@ -28,6 +28,13 @@ const routes = [
     private: true,
   },
   {
+    path: "/messages/t/:userId",
+    component: <MessagesPage />,
+    title: "Messages",
+    exact: true,
+    private: true,
+  },
+  {
     path: "/settings",
     component: <SettingsPage />,
     title: "Settings",

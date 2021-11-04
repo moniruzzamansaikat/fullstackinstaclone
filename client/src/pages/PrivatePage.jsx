@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PrivatePage({ children, ...rest }) {
   const { user, fetchingUser } = useSelector((state) => state.auth);
-
-  console.log(fetchingUser);
 
   return (
     <Route

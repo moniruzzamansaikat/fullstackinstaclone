@@ -1,2 +1,18 @@
 .messages_page {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  background: #fff;
+  box-shadow: 3px 8px 23px -1px rgba(0, 0, 0, 0.33);
+  min-height: 500px;
+}
+
+.messages_page .message_container {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid gray;
+  padding: 10px;
+}
+
+.messages_page .message_container section {
+  flex: 12;
 }

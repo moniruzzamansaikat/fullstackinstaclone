@@ -9,6 +9,11 @@
   margin: 1rem 0;
 }
 
+.user_card.link:hover {
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
 .user_card img {
   width: 35px !important;
   height: 35px !important;

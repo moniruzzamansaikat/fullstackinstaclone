@@ -5,6 +5,8 @@ import { FaComment } from "react-icons/fa";
 import "./styles/PostSmallCard.css";
 
 function PostSmallCard({ post }) {
+  if (!post) return null;
+
   return (
     <Link
       to={`/posts/${post._id}`}

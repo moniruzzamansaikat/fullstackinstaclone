@@ -2,6 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const fileupload = require("express-fileupload");
+const { Server } = require("socket.io");
+const Message = require("./models/Message");
+const User = require("./models/User");
 
 const app = express();
 
@@ -16,7 +19,14 @@ app.use("/api", require("./routes"));
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   require("./utils/db");
 });
+
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
+require("./utils/messages")(io);

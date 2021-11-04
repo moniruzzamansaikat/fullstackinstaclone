@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authRequest } from "../utils/xhr";
 import MainLayout from "../components/Layouts/MainLayout";
 import { BsThreeDots } from "react-icons/bs";
-import { FaRegComment } from "react-icons/fa";
 import AddComment from "../components/Posts/AddComment";
 import SingePostComment from "../components/Comment/SingePostComment";
 import PostSave from "../components/Posts/PostSave";
 import PostLike from "../components/Posts/PostLike";
-import "./styles/PostPage.css";
 import { fetchSinglePost } from "../store/posts/posts";
+import "./styles/PostPage.css";
 
 function PostPage() {
   const dispatch = useDispatch();

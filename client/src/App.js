@@ -5,9 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import DropDownMenu from "./components/Shared/DropDownMenu";
 import PrivatePage from "./pages/PrivatePage";
 import { useEffect } from "react";
-import { authCheck, checkAuthenticatinon } from "./store/auth/auth";
+import { checkAuthenticatinon } from "./store/auth/auth";
 import Meta from "./components/Meta";
+import MainLoader from "./components/Shared/MainLoader";
+import io from "socket.io-client";
 import "./App.css";
+import { setSocket } from "./store/users/users";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +22,16 @@ function App() {
     dispatch(checkAuthenticatinon(token));
   }, [token, dispatch]);
 
+  useEffect(() => {
+    if (user) {
+      const socket = io.connect("http://localhost:5000/messages");
+      socket.emit("connect_user", user);
+      dispatch(setSocket(socket));
+    }
+  }, [dispatch, user]);
+
+  if (fetchingUser) return <MainLoader />;
+
   return (
     <div>
       {(uploadingPhotos || openDropdownMenu) && (
@@ -26,8 +39,8 @@ function App() {
       )}
 
       {openDropdownMenu && <DropDownMenu />}
-
       {user && <Navbar />}
+
       <Switch>
         {routes.map((route, index) =>
           route.private ? (

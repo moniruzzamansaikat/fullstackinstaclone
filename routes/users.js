@@ -16,8 +16,10 @@ router.get("/suggestions", checkAuth, async (req, res) => {
 
 // get user by id
 router.get("/:id", async (req, res) => {
-  const user = await User.findById(req.params.id);
-  res.json(user);
+  try {
+    const user = await User.findById(req.params.id);
+    res.json(user);
+  } catch (error) {}
 });
 
 // follow user

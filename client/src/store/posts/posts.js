@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { setToken } from "../auth/auth";
 import { authRequest } from "../../utils/xhr";
 import postsExtraReducers from "./postsExtraReducers";
+import { addSavedPost, removeSavedPost } from "../auth/auth";
 
 const initialState = {
   posts: [],
@@ -72,6 +72,7 @@ export const savePost = createAsyncThunk(
           method: "POST",
         }
       );
+      dispatch(addSavedPost(data));
       return data;
     } catch (error) {
       const { data: reason } = error.response;
@@ -90,6 +91,7 @@ export const removeFromSaved = createAsyncThunk(
           method: "DELETE",
         }
       );
+      dispatch(removeSavedPost(data));
       return data;
     } catch (error) {
       const { data: reason } = error.response;

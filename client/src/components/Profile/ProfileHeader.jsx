@@ -22,7 +22,9 @@ function ProfileHeader({ user, mainUser }) {
               Setting
             </Link>
           ) : (
-            <FollowButton user={user} />
+            <div style={{ display: "flex" }}>
+              <FollowButton user={user} />
+            </div>
           )}
           <p className="links">
             <Link to={`/profile/${user._id}/followers`}>
@@ -38,4 +40,4 @@ function ProfileHeader({ user, mainUser }) {
   );
 }
 
-export default memo(ProfileHeader);
+export default ProfileHeader;

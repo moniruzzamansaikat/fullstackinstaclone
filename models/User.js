@@ -6,6 +6,7 @@ const UserSchema = new Schema({
   name: { type: String, trim: true },
   email: { type: String, trim: true },
   bio: { type: String, default: "", trim: true },
+  active: { type: Boolean, default: true },
   password: String,
   photo: {
     url: { type: String, default: "" },

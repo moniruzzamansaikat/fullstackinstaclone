@@ -7,6 +7,7 @@ import "./styles/PostSave.css";
 function PostSave({ post }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const { savedPosts } = useSelector((state) => state.posts);
 
   const handleSave = () => {
     dispatch(savePost(post._id));
