@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MainLayout from "../components/Layouts/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import UserCard from "../components/Shared/UserCard";
@@ -8,7 +8,7 @@ import {
   fetchMessages,
   setActiveUsers,
 } from "../store/users/users";
-import { useHistory, useParams, useLocation } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Messages from "../components/Messages/Messages";
 import SendMessage from "../components/Messages/SendMessage";
 import MessageUserHeader from "../components/Messages/MessageUserHeader";
@@ -17,17 +17,17 @@ import "./styles/MessagesPage.css";
 function MessagesPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
   const params = useParams();
   const { inboxUser, socket, activeUsers } = useSelector(
     (state) => state.users
   );
   const { user } = useSelector((state) => state.auth);
+
   useEffect(() => {
-    socket?.on("active_users", (users) => {
+    socket.on("active_users", (users) => {
       dispatch(setActiveUsers(users));
     });
-  }, [dispatch, socket, location, params]);
+  });
 
   useEffect(() => {
     dispatch(fetchFollowing(user?._id));
@@ -71,7 +71,7 @@ function MessagesPage() {
         {params?.userId ? (
           <div className="message_container">
             <MessageUserHeader user={inboxUser} />
-            <Messages inboxUser={inboxUser} socket={socket} />
+            <Messages inboxUser={inboxUser} />
             <SendMessage
               socket={socket}
               sender={user?._id}

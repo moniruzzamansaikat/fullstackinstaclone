@@ -22,7 +22,7 @@ export default function Suggestions() {
         </Link>
       </div>
 
-      {suggestedUsers?.map((user) => (
+      {suggestedUsers?.slice(0, 5)?.map((user) => (
         <SuggestedUserCard key={user._id} user={user} />
       ))}
     </div>

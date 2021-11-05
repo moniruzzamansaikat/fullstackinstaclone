@@ -35,7 +35,8 @@ router.post("/register", async (req, res) => {
       email,
       password,
     });
-    const token = getToken(user);
+
+    const token = getToken({ _id: user?._id });
     return res.json({ token, user });
   } else {
     return res.status(400).json({ errors });

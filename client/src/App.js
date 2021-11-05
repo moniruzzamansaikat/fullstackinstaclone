@@ -9,7 +9,7 @@ import { checkAuthenticatinon, fetchNotifications } from "./store/auth/auth";
 import Meta from "./components/Meta";
 import MainLoader from "./components/Shared/MainLoader";
 import io from "socket.io-client";
-import { setSocket } from "./store/users/users";
+import { setActiveUsers, setSocket } from "./store/users/users";
 import "./App.css";
 import Notif from "./components/Shared/Notif";
 
@@ -29,12 +29,17 @@ function App() {
     dispatch(checkAuthenticatinon(token));
   }, [token, dispatch]);
 
+  // socket io
   useEffect(() => {
+    const socket = io.connect("ws://localhost:8888");
     if (user) {
-      const socket = io.connect("ws://localhost:8888");
       socket.emit("connect_user", user?._id);
       dispatch(setSocket(socket));
     }
+
+    socket.on("active_users", (users) => {
+      dispatch(setActiveUsers(users));
+    });
   }, [dispatch, user]);
 
   if (fetchingUser) return <MainLoader />;

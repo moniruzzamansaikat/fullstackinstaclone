@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserData } from "../../store/auth/auth";
-import "./styles/UserDataSetting.css";
+import "./styles/ContactInfoSetting.css";
 
-function UserDataSetting({ user }) {
+function ContactInfoSetting({ user }) {
   const { updatingUserData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [file, setFile] = useState({ url: "", file: null });
@@ -45,10 +45,10 @@ function UserDataSetting({ user }) {
       {updatingUserData && <p className="success_msg">Saving your data</p>}
 
       <form onSubmit={handleSubmit}>
-        <h2>Basic Info</h2>
+        <h2>Contact Info</h2>
 
         <div className="input_div">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Home Town</label>
           <input
             type="text"
             id="name"
@@ -57,7 +57,7 @@ function UserDataSetting({ user }) {
           />
         </div>
         <div className="input_div">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Current City</label>
           <input
             type="email"
             id="email"
@@ -68,7 +68,7 @@ function UserDataSetting({ user }) {
           />
         </div>
         <div className="input_div">
-          <label htmlFor="bio">Bio</label>
+          <label htmlFor="bio">High School</label>
           <input
             type="bio"
             id="bio"
@@ -77,15 +77,11 @@ function UserDataSetting({ user }) {
           />
         </div>
         <div className="input_div">
-          <label>Profile Photo</label>
-          <div>
-            <label htmlFor="photo" id="photo_up_design">
-              <MdOutlineFileUpload />
-            </label>
-            <input onChange={handleFileChange} type="file" id="photo" />
-          </div>
-
-          {file.url && <img className="img_preview" src={file.url} alt="" />}
+          <label htmlFor="bio">Relationship Status</label>
+          <select name="relationship" id="">
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+          </select>
         </div>
 
         <div>
@@ -96,4 +92,4 @@ function UserDataSetting({ user }) {
   );
 }
 
-export default UserDataSetting;
+export default ContactInfoSetting;

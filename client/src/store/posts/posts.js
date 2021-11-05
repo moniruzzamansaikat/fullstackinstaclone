@@ -202,31 +202,6 @@ const posts = createSlice({
     setRemovingPost: (state, { payload }) => {
       state.removingPost = payload;
     },
-
-    setLikePost: (state, { payload }) => {
-      console.log(payload);
-
-      if (payload.postId === state.singlePost._id) {
-        state.singlePost.likes.push(payload.data);
-      }
-      state.posts = state.posts.map((post) => {
-        if (post._id === payload.postId) post.likes.push(payload.data);
-        return post;
-      });
-    },
-
-    setDislikePost: (state, { payload }) => {
-      if (payload.postId === state.singlePost._id) {
-        state.singlePost.likes = state.singlePost.likes.filter(
-          (like) => like._id !== payload.postId
-        );
-      }
-      state.posts = state.posts.map((post) => {
-        if (post._id === payload.postId)
-          post.likes = post.likes.filter((like) => like._id !== payload.postId);
-        return post;
-      });
-    },
   },
 
   extraReducers: postsExtraReducers,
@@ -241,7 +216,5 @@ export const {
   setOpenDropdownMenu,
   setDropdownedPost,
   setRemovingPost,
-  setLikePost,
-  setDislikePost,
 } = posts.actions;
 export default posts.reducer;

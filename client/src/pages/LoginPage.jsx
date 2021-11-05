@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation, Link } from "react-router-dom";
 import { loginUser } from "../store/auth/auth";
-import banner from "../images/banner.png";
 import "./styles/LoginPage.css";
 
 function LoginPage() {
@@ -17,7 +16,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (user) {
-      history.replace(from);
+      history.push(from);
     }
   }, [user, from, history]);
 
@@ -32,7 +31,7 @@ function LoginPage() {
 
   return (
     <div className="login_page">
-      <header style={{ backgroundImage: `url(${banner})` }}>
+      <header>
         <div></div>
         <div className="site_info">
           <p className="logo">[saik.net]</p>

@@ -6,6 +6,7 @@ import {
   removeFromSaved,
 } from "./posts";
 import { addComment } from "./comment";
+import { dislikePost, likePost } from "./likes";
 
 const postsExtraReducers = (builder) => {
   builder
@@ -23,6 +24,38 @@ const postsExtraReducers = (builder) => {
     })
     .addCase(savePost.fulfilled, (state, { payload }) => {
       state.savedPosts = [...state.savedPosts, payload];
+    })
+
+    // like post
+    .addCase(likePost.fulfilled, (state, { payload }) => {
+      if (payload.postId === state.singlePost._id) {
+        state.singlePost.likes.push(payload.data);
+      }
+
+      state.posts = state.posts.map((post) => ({
+        ...post,
+        likes:
+          post._id === payload.postId
+            ? [...post.likes, payload.data]
+            : post.likes,
+      }));
+    })
+
+    // dislike post
+    .addCase(dislikePost.fulfilled, (state, { payload }) => {
+      if (payload.postId === state.singlePost._id) {
+        state.singlePost.likes = state.singlePost.likes.filter(
+          (like) => like?._id !== payload?.data?._id
+        );
+      }
+
+      state.posts = state.posts.map((post) => ({
+        ...post,
+        likes:
+          post._id === payload.postId
+            ? post.likes.filter((like) => like?._id !== payload?.data?._id)
+            : post.likes,
+      }));
     })
     .addCase(removeFromSaved.fulfilled, (state, { payload }) => {
       state.savedPosts = state.savedPosts.filter(

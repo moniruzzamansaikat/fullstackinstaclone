@@ -10,7 +10,10 @@ const { getToken } = require("../utils/jwt");
 
 // get all suggested users
 router.get("/suggestions", checkAuth, async (req, res) => {
-  const users = await User.find({ _id: { $ne: req.userId } });
+  const users = await User.find({
+    _id: { $ne: req.userId },
+    followers: { $nin: req.userId },
+  });
   res.json(users);
 });
 

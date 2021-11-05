@@ -12,6 +12,7 @@ import FollowingPage from "../pages/FollowingPage";
 import SavedPage from "../pages/SavedPage";
 import PostPage from "../pages/PostPage";
 import AboutUs from "../pages/AboutUs";
+import SuggestionsPage from "../pages/SuggestionsPage";
 
 const routes = [
   {
@@ -60,6 +61,13 @@ const routes = [
     path: "/saved",
     component: <SavedPage />,
     title: "Saved Posts",
+    exact: true,
+    private: true,
+  },
+  {
+    path: "/suggestions",
+    component: <SuggestionsPage />,
+    title: "Suggested Users",
     exact: true,
     private: true,
   },

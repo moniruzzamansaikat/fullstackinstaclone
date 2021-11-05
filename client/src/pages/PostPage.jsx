@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import MainLayout from "../components/Layouts/MainLayout";
@@ -49,9 +49,7 @@ function PostPage() {
 
           <section className="footer">
             <div className="icons">
-              <div>
-                <PostLike post={post} user={user} />
-              </div>
+              <PostLike post={post} user={user} />
               <PostSave post={post} />
             </div>
             <AddComment postId={postId} />

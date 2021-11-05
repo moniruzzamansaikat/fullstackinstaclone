@@ -9,6 +9,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .login_page header {
+    grid-template-columns: 1fr;
+  }
 }
 
 .login_page header .site_info {
@@ -50,6 +57,12 @@
 .login_page main {
   display: grid;
   grid-template-columns: 300px auto;
+}
+
+@media (max-width: 768px) {
+  .login_page main {
+    grid-template-columns: 1fr;
+  }
 }
 
 .login_page main aside {

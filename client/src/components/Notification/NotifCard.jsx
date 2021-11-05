@@ -19,7 +19,7 @@ function NotifCard({ notif }) {
   };
 
   return (
-    <div className="notif_card">
+    <div className={`notif_card ${!notif.seen && "seen"}`}>
       <Link to={link} onClick={makeSeenNotif}>
         <div>
           <div>

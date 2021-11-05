@@ -70,7 +70,7 @@ function NavItems() {
             <BsGear />
             <span>Settings</span>
           </Link>
-          <Link to="/settings" onClick={() => dispatch(logoutUser())}>
+          <Link to="#" onClick={() => dispatch(logoutUser())}>
             <AiOutlineLogout />
             <span>Logout</span>
           </Link>

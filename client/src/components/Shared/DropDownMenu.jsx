@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setOpenDropdownMenu,
   setDropdownedPost,
   deletePost,
 } from "../../store/posts/posts";
+import { unfollowPeople } from "../../store/users/users";
 import "./styles/DropDownMenu.css";
 
 function DropDownMenu() {
@@ -22,13 +23,25 @@ function DropDownMenu() {
     dispatch(setDropdownedPost(null));
   };
 
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      if (e.keyCode === 27) {
+        dispatch(setDropdownedPost(null));
+      }
+    });
+  });
+
   return (
     <div className="dropdown_menu">
       <div className="drop_down_items">
-        {dropdownedPost.user?._id === user._id ? (
+        {dropdownedPost?.user?._id === user._id ? (
           <button onClick={hanldeDeletePost}>Delete Post</button>
         ) : null}
-        <button>Unfollow</button>
+        <button
+          onClick={() => dispatch(unfollowPeople(dropdownedPost?.user?._id))}
+        >
+          Unfollow
+        </button>
         <button>Share</button>
         <button onClick={handleCrossClick}>Cancel</button>
       </div>

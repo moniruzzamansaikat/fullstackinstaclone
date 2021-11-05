@@ -11,7 +11,6 @@ function Messages({ inboxUser }) {
   const { user } = useSelector((state) => state.auth);
   const scrollRef = useRef();
   const audioRef = useRef();
-  let cnt = 0;
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });

@@ -35,6 +35,7 @@ export const seenNotification = createAsyncThunk(
         `/notifications/${notifId}/seen`,
         { method: "PUT" }
       );
+
       return data;
     } catch (error) {
       const { data: reason } = error.response;
@@ -85,6 +86,7 @@ export const registerUser = createAsyncThunk(
         method: "POST",
         data: userData,
       });
+
       console.log(data);
       dispatch(setToken(data.token));
       dispatch(setUser(data.user));
