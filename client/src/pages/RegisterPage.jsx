@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router";
-import MainLayout from "../components/Layouts/MainLayout";
+import { useHistory, useLocation, Link } from "react-router-dom";
 import { registerUser } from "../store/auth/auth";
+import banner from "../images/banner.png";
+import "./styles/LoginPage.css";
+import "./styles/RegisterPage.css";
 
-function LoginPage() {
+function RegisterPage() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [name, setName] = useState("");
@@ -34,52 +36,86 @@ function LoginPage() {
   };
 
   return (
-    <MainLayout>
-      <h2>Register</h2>
+    <div className="login_page register_page">
+      <header style={{ backgroundImage: `url(${banner})` }}>
+        <div></div>
+        <div className="site_info">
+          <p className="logo">[saik.net]</p>
+          <ul className="menu">
+            <li>
+              <Link to="/login">login</Link>
+            </li>
+            <li>
+              <Link to="/register">register</Link>
+            </li>
+            <li>
+              <Link to="/about-us">about</Link>
+            </li>
+          </ul>
+        </div>
+      </header>
 
-      <form onSubmit={handleLoginSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password1">Repeat Password</label>
-          <input
-            type="password"
-            id="password1"
-            value={password1}
-            onChange={(e) => setPassword1(e.target.value)}
-          />
-        </div>
-        <div>
-          <button type="submit">Login</button>
-        </div>
-      </form>
-    </MainLayout>
+      <main>
+        <aside>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil cum
+            obcaecati cumque? Tenetur porro voluptatum quo accusantium
+            asperiores nisi deserunt veniam incidunt eius, nesciunt, non in
+            ipsam provident repellendus ipsa.
+          </p>
+        </aside>
+
+        <section>
+          <h2>Welcome to saik.net</h2>
+          <div className="content">
+            <h1>[Reigster Now]</h1>
+
+            <form onSubmit={handleLoginSubmit} className="register_form">
+              <div>
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="password1">Repeat Password</label>
+                <input
+                  type="password"
+                  id="password1"
+                  value={password1}
+                  onChange={(e) => setPassword1(e.target.value)}
+                />
+              </div>
+              <div>
+                <button type="submit">Register</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

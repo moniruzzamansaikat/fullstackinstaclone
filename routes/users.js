@@ -47,7 +47,9 @@ router.post("/follow", checkAuth, async (req, res) => {
   // make notification
   await Notification.create({
     text: `${currentUser.name} follows you`,
-    user: req.userId,
+    user: userId,
+    type: "follow",
+    notifUser: currentUser?._id,
   });
 
   res.json(userId);

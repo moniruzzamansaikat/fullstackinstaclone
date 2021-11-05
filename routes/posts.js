@@ -104,8 +104,9 @@ router.put("/:id/like", checkAuth, async (req, res) => {
   if (req.userId !== String(post?.user)) {
     const notif = await Notification.create({
       text: `${user.name} liked your post.`,
-      user: req.userId,
+      user: post?.user,
       post: postId,
+      notifUser: user?._id,
     });
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import NavItem from "./NavItem";
 import { GrHome } from "react-icons/gr";
 import { BsChat, BsGear, BsSuitHeart } from "react-icons/bs";
@@ -8,15 +8,16 @@ import {
   AiOutlineSave,
 } from "react-icons/ai";
 import { FaRegUserCircle } from "react-icons/fa";
-import "./styles/NavItems.css";
 import { Link, withRouter, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../store/auth/auth";
+import "./styles/NavItems.css";
 
 function NavItems() {
   const dispatch = useDispatch();
   const location = useLocation();
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const { notifications } = useSelector((state) => state.auth);
 
   // profile icon click
   const handleClick = (e) => {
@@ -28,6 +29,11 @@ function NavItems() {
     setProfileMenuOpen(false);
   }, [location]);
 
+  // unseen notifs
+  const unseenNotifs = useMemo(() => {
+    return notifications?.filter((notif) => !notif.seen);
+  }, [notifications]);
+
   return (
     <div>
       <ul className="nav_items">
@@ -36,7 +42,12 @@ function NavItems() {
         <NavItem link="/add" icon={<AiOutlinePlusSquare className="icon" />} />
         <NavItem
           link="/notifications"
-          icon={<BsSuitHeart className="icon" />}
+          icon={
+            <div className="has_overlay">
+              <BsSuitHeart className="icon" />
+              <sup>{unseenNotifs?.length}</sup>
+            </div>
+          }
         />
         <NavItem
           isButton={true}

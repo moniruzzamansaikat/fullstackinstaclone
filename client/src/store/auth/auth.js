@@ -7,6 +7,7 @@ const initialState = {
   fetchingUser: false,
   updatingUserData: false,
   notifications: [],
+  errors: [],
 };
 
 // fetch notifications
@@ -21,6 +22,22 @@ export const fetchNotifications = createAsyncThunk(
     } catch (error) {
       const { data: reason } = error.response;
       console.log(reason);
+    }
+  }
+);
+
+// seen notification
+export const seenNotification = createAsyncThunk(
+  "auth/unseenNotification",
+  async (notifId, { getState }) => {
+    try {
+      const { data } = await authRequest(getState().auth.token)(
+        `/notifications/${notifId}/seen`,
+        { method: "PUT" }
+      );
+      return data;
+    } catch (error) {
+      const { data: reason } = error.response;
     }
   }
 );
@@ -68,11 +85,12 @@ export const registerUser = createAsyncThunk(
         method: "POST",
         data: userData,
       });
+      console.log(data);
       dispatch(setToken(data.token));
       dispatch(setUser(data.user));
     } catch (error) {
       const { data: reason } = error.response;
-      console.log(reason);
+      dispatch(setErrors(reason.errors));
     }
   }
 );
@@ -91,7 +109,7 @@ export const loginUser = createAsyncThunk(
       dispatch(setUser(data.user));
     } catch (error) {
       const { data: reason } = error.response;
-      console.log(reason);
+      dispatch(setErrors(reason.errors));
     }
   }
 );
@@ -167,6 +185,19 @@ const auth = createSlice({
         (follow) => follow !== payload
       );
     },
+
+    setErrors: (state, { payload }) => {
+      state.errors = payload;
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(seenNotification.fulfilled, (state, { payload }) => {
+      state.notifications = state.notifications.map((notif) => {
+        if (notif?._id === payload?._id) notif.seen = true;
+        return notif;
+      });
+    });
   },
 });
 
@@ -182,5 +213,6 @@ export const {
   addSavedPost,
   removeSavedPost,
   removeFollowId,
+  setErrors,
 } = auth.actions;
 export default auth.reducer;

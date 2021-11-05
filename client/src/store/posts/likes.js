@@ -13,7 +13,8 @@ export const likePost = createAsyncThunk(
           method: "PUT",
         }
       );
-      dispatch(setLikePost({ postId, ...data }));
+      // return data;
+      dispatch(setLikePost({ postId, data }));
     } catch (error) {
       const { data: reason } = error.response;
       console.log(reason);
@@ -33,7 +34,7 @@ export const dislikePost = createAsyncThunk(
         }
       );
 
-      dispatch(setDislikePost({ postId, ...data }));
+      dispatch(setDislikePost({ postId, data }));
     } catch (error) {
       const { data: reason } = error.response;
       console.log(reason);

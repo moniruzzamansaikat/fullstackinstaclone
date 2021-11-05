@@ -26,5 +26,6 @@
 
 .notif_card a div {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }

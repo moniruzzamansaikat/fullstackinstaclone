@@ -92,9 +92,9 @@ router.put("/update", checkAuth, async (req, res) => {
       {
         new: true,
       }
-    );
+    ).select("_id");
 
-    const token = getToken(user);
+    const token = getToken(user.toJSON());
     return res.json({
       user,
       token,
@@ -112,9 +112,9 @@ router.put("/update", checkAuth, async (req, res) => {
       {
         new: true,
       }
-    );
+    ).select("_id");
 
-    const token = getToken(user);
+    const token = getToken(user.toJSON());
     return res.json({
       user,
       token,

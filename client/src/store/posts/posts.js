@@ -204,28 +204,28 @@ const posts = createSlice({
     },
 
     setLikePost: (state, { payload }) => {
+      console.log(payload);
+
       if (payload.postId === state.singlePost._id) {
-        state.singlePost.likes.push(payload);
-      } else {
-        state.posts = state.posts.map((post) => {
-          if (post._id === payload.postId) post.likes.push(payload);
-          return post;
-        });
+        state.singlePost.likes.push(payload.data);
       }
+      state.posts = state.posts.map((post) => {
+        if (post._id === payload.postId) post.likes.push(payload.data);
+        return post;
+      });
     },
 
     setDislikePost: (state, { payload }) => {
       if (payload.postId === state.singlePost._id) {
         state.singlePost.likes = state.singlePost.likes.filter(
-          (like) => like._id !== payload._id
+          (like) => like._id !== payload.postId
         );
-      } else {
-        state.posts = state.posts.map((post) => {
-          if (post._id === payload.postId)
-            post.likes = post.likes.filter((like) => like._id !== payload._id);
-          return post;
-        });
       }
+      state.posts = state.posts.map((post) => {
+        if (post._id === payload.postId)
+          post.likes = post.likes.filter((like) => like._id !== payload.postId);
+        return post;
+      });
     },
   },
 

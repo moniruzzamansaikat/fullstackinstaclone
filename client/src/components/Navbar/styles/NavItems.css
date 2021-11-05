@@ -61,3 +61,21 @@
   margin-left: 10px;
   font-size: 14px;
 }
+
+.has_overlay {
+  position: relative;
+}
+
+.has_overlay sup {
+  background: red;
+  font-weight: 800;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  color: #f0f0f0;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+}

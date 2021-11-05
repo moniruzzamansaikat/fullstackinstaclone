@@ -11,6 +11,7 @@ import FollowersPage from "../pages/FollowersPage";
 import FollowingPage from "../pages/FollowingPage";
 import SavedPage from "../pages/SavedPage";
 import PostPage from "../pages/PostPage";
+import AboutUs from "../pages/AboutUs";
 
 const routes = [
   {
@@ -100,12 +101,19 @@ const routes = [
     path: "/posts/:id",
     component: <PostPage />,
     exact: true,
-    private: false,
+    private: true,
   },
   {
     path: "/login",
     component: <LoginPage />,
     title: "Login",
+    exact: true,
+    private: false,
+  },
+  {
+    path: "/about-us",
+    component: <AboutUs />,
+    title: "About",
     exact: true,
     private: false,
   },
