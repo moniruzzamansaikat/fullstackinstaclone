@@ -9,6 +9,7 @@ const User = require("./models/User");
 const app = express();
 
 // middlewares
+app.use(express.static(__dirname + "/client/build"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({}));
 app.use(cors());
