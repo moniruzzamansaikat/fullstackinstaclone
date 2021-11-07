@@ -123,9 +123,14 @@ export const checkAuthenticatinon = createAsyncThunk(
     dispatch(setFetchingUser(true));
 
     try {
-      const { data } = await authRequest(token)("/auth/check");
-      dispatch(setUser(data));
-      dispatch(setFetchingUser(false));
+      if (token) {
+        const { data } = await authRequest(token)("/auth/check");
+        dispatch(setUser(data));
+        dispatch(setFetchingUser(false));
+      } else {
+        dispatch(setUser(null));
+        dispatch(setFetchingUser(false));
+      }
     } catch (error) {
       const { data: reason } = error.response;
       dispatch(setFetchingUser(false));
