@@ -28,7 +28,7 @@ const server = app.listen(PORT, () => {
   require("./utils/db");
 });
 
-const io = new Server(8888, {
+const io = new Server(server, {
   cors: {
     origin: "https://saikim.herokuapp.com/",
   },
