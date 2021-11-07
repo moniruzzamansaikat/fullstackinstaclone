@@ -1,8 +1,8 @@
-import React, { memo } from "react";
+import React from "react";
 import image from "../../images/user_default.png";
 import { Link } from "react-router-dom";
-import "./styles/ProfileHeader.css";
 import FollowButton from "../Shared/FollowButton";
+import "./styles/ProfileHeader.css";
 
 function ProfileHeader({ user, mainUser }) {
   return (

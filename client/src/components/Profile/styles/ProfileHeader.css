@@ -21,6 +21,12 @@
   color: #000;
 }
 
+@media (max-width: 568px) {
+  .profile_header .links a:last-child {
+    margin: 0 !important;
+  }
+}
+
 .profile_header .links a:first-child {
   margin-left: 0;
 }

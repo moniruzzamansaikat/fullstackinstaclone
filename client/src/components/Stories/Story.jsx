@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./styles/Story.css";
 import image from "../../images/avatar.jpg";
+import "./styles/Story.css";
 
 function Story() {
   const [username] = useState("saikat");

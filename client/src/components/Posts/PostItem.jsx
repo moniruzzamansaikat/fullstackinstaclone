@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import PostImage from "./PostImage";
@@ -34,6 +34,7 @@ function PostItem({ post }) {
       {/* post actions */}
       <div className="post_actions">
         <PostLike post={post} user={user} />
+
         <PostSave post={post} />
       </div>
 

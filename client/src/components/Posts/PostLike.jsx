@@ -1,11 +1,13 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { FaRegComment } from "react-icons/fa";
 import { dislikePost, likePost } from "../../store/posts/likes";
 
 function PostLike({ post, user, noText }) {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handlePostLike = () => dispatch(likePost(post._id));
   const handlePostDislike = () => dispatch(dislikePost(post._id));
@@ -29,12 +31,22 @@ function PostLike({ post, user, noText }) {
     );
   }, [post]);
 
+  const goToPost = useCallback(() => {
+    history.push(`/posts/${post?._id}`);
+  }, [history, post]);
+
   return (
     <div style={{ display: noText ? "inline" : "flex", alignItems: "center" }}>
       {likedPost ? (
-        <AiFillHeart id="icon" onClick={handlePostDislike} />
+        <div>
+          <AiFillHeart id="icon" onClick={handlePostDislike} />
+          <FaRegComment id="icon" onClick={goToPost} />
+        </div>
       ) : (
-        <AiOutlineHeart id="icon" onClick={handlePostLike} />
+        <div>
+          <AiOutlineHeart id="icon" onClick={handlePostLike} />
+          <FaRegComment id="icon" onClick={goToPost} />
+        </div>
       )}
       {!noText && <span>{likeText}</span>}
     </div>

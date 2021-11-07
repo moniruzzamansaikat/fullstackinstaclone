@@ -11,11 +11,8 @@
   color: #0f0f0f;
 }
 
-.nav_item {
-}
-.nav_item {
-}
-.nav_item {
-}
-.nav_item {
+@media (max-width: 520px) {
+  .nav_item .icon {
+    font-size: 18px;
+  }
 }
