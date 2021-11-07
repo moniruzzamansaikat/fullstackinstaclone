@@ -128,7 +128,6 @@ export const checkAuthenticatinon = createAsyncThunk(
       dispatch(setFetchingUser(false));
     } catch (error) {
       const { data: reason } = error.response;
-      console.log(reason);
       dispatch(setFetchingUser(false));
     }
   }
