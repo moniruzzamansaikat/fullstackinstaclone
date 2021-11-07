@@ -18,7 +18,7 @@
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  background: #ffff;
+  background: rgb(209, 209, 209);
   box-sizing: 0px 0px 5px rgb(13 13 13 / 89%);
 }
 
@@ -34,9 +34,12 @@
   padding: 1rem;
   border-top: 1px solid rgb(194, 194, 194);
   border-bottom: 1px solid rgb(194, 194, 194);
+}
+
+.post_item .post_actions .icons {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .post_item .post_actions #icon {
