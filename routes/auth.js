@@ -6,8 +6,12 @@ const { getToken } = require("../utils/jwt");
 
 // check auth
 router.get("/check", checkAuth, async (req, res) => {
-  const user = await User.findById(req.userId);
-  res.json(user);
+  if (req.userId) {
+    const user = await User.findById(req.userId);
+    return res.status(200).json(user);
+  }
+
+  return res.status(403).send("Unauthorized");
 });
 
 // register
