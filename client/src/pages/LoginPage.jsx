@@ -79,7 +79,7 @@ function LoginPage() {
         <section>
           <h2>Welcome to saik.net</h2>
           <div className="content">
-            <h1>[Welcome to the saik.net]</h1>
+            <h1>[Welcome to the saikim.net]</h1>
 
             <p>Connect to your friends and family online .........</p>
             <p>

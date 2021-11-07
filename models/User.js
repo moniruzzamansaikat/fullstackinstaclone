@@ -9,7 +9,11 @@ const UserSchema = new Schema({
   active: { type: Boolean, default: true },
   password: String,
   photo: {
-    url: { type: String, default: "" },
+    url: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/dqgccsuki/image/upload/v1636300026/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714_kbv97r.jpg",
+    },
     publicId: { type: String, default: "" },
   },
   followers: [{ type: Types.ObjectId, ref: "User" }],

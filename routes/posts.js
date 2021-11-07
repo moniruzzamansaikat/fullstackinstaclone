@@ -12,10 +12,14 @@ router.get("/", checkAuth, async (req, res) => {
     sort: { createdAt: -1 },
   })
     .populate({ path: "user", select: "name _id photo followers" })
-    .populate({ path: "comments.user", select: "name photo" })
+    .populate({ path: "comments.user", select: "_id name photo" })
     .populate({ path: "likes", select: "_id name" });
 
-  posts = posts.filter((post) => post.user.followers.includes(req.userId));
+  // filter posts for following users only
+  posts = posts.filter(
+    (post) =>
+      post.user.followers.includes(req.userId) || post.user._id === req.userId
+  );
   res.json(posts);
 });
 

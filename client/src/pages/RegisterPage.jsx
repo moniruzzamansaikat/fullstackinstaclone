@@ -40,7 +40,7 @@ function RegisterPage() {
       <header style={{ backgroundImage: `url(${banner})` }}>
         <div></div>
         <div className="site_info">
-          <p className="logo">[saik.net]</p>
+          <p className="logo">[saikim.net]</p>
           <ul className="menu">
             <li>
               <Link to="/login">login</Link>
@@ -58,10 +58,11 @@ function RegisterPage() {
       <main>
         <aside>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil cum
-            obcaecati cumque? Tenetur porro voluptatum quo accusantium
-            asperiores nisi deserunt veniam incidunt eius, nesciunt, non in
-            ipsam provident repellendus ipsa.
+            <h2>Create an account</h2>
+            <p>
+              Create an account to be connected to your friends and family now
+              😀
+            </p>
           </p>
         </aside>
 
