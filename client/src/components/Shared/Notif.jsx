@@ -20,7 +20,7 @@ function Notif() {
   }, [dispatch, location]);
 
   useEffect(() => {
-    if (errors.length) notify(errors[0], "error");
+    if (errors?.length) notify(errors[0], "error");
   }, [errors]);
 
   return (
