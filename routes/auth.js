@@ -16,34 +16,38 @@ router.get("/check", checkAuth, async (req, res) => {
 
 // register
 router.post("/register", async (req, res) => {
-  const errors = [];
-  const { name, email, password, password1 } = req.body;
-  if (name?.trim().length === 0) errors.push("Name is required");
-  if (email?.trim().length === 0) errors.push("Email is required");
-  if (password?.trim().length === 0) errors.push("Password is required");
-  if (password?.trim().length < 6)
-    errors.push("Password must be at least 6 characters long");
-  if (password?.trim() !== password1?.trim())
-    errors.push("Password don't match");
+  try {
+    const errors = [];
+    const { name, email, password, password1 } = req.body;
+    if (name?.trim().length === 0) errors.push("Name is required");
+    if (email?.trim().length === 0) errors.push("Email is required");
+    if (password?.trim().length === 0) errors.push("Password is required");
+    if (password?.trim().length < 6)
+      errors.push("Password must be at least 6 characters long");
+    if (password?.trim() !== password1?.trim())
+      errors.push("Password don't match");
 
-  // if email already signed in
-  const foundUser = await User.findOne({ email }).lean();
-  if (foundUser) {
-    errors.push("Email is already signed in!");
-  }
+    // if email already signed in
+    const foundUser = await User.findOne({ email }).lean();
+    if (foundUser) {
+      errors.push("Email is already signed in!");
+    }
 
-  // no erros
-  if (errors.length === 0) {
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
+    // no erros
+    if (errors.length === 0) {
+      const user = await User.create({
+        name,
+        email,
+        password,
+      });
 
-    const token = getToken({ _id: user?._id });
-    return res.json({ token, user });
-  } else {
-    return res.status(400).json({ errors });
+      const token = getToken({ _id: user?._id });
+      return res.json({ token, user });
+    } else {
+      return res.status(400).json({ errors });
+    }
+  } catch (error) {
+    return res.status(500).send(error.message);
   }
 });
 
