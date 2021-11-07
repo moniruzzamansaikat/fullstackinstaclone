@@ -10,8 +10,8 @@ import Meta from "./components/Meta";
 import MainLoader from "./components/Shared/MainLoader";
 import io from "socket.io-client";
 import { setActiveUsers, setSocket } from "./store/users/users";
-import "./App.css";
 import Notif from "./components/Shared/Notif";
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,10 +20,9 @@ function App() {
   const { user, token, fetchingUser } = useSelector((state) => state.auth);
 
   // fetch notifs
-
   useEffect(() => {
     dispatch(fetchNotifications());
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   useEffect(() => {
     dispatch(checkAuthenticatinon(token));
