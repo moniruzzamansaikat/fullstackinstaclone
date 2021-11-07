@@ -31,7 +31,7 @@ function App() {
 
   // socket io
   useEffect(() => {
-    const socket = io.connect("ws://localhost:8888");
+    const socket = io.connect("https://saikim.herokuapp.com/");
     if (user) {
       socket.emit("connect_user", user?._id);
       dispatch(setSocket(socket));
