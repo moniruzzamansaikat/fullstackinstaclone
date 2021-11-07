@@ -1,23 +1,14 @@
 const jwt = require("jsonwebtoken");
 
 exports.checkAuth = (req, res, next) => {
-  if (!req.headers.authorization) {
-    return res.status(403).json({ errors: ["You are not authorized!"] });
+  if (req.headers && req.headers.authorization) {
+    if (typeof req.headers.authorization.split(" ")[1] !== "undefined") {
+      const token = req.headers.authorization.split(" ")[1];
+      const decoded = jwt.decode(token);
+      req.userId = decoded._id;
+      return next();
+    }
   }
 
-  const token =
-    req.headers.authorization.split(" ")[1] &&
-    req.headers.authorization.split(" ")[1];
-
-  if (!token) {
-    return res.status(403).json({ errors: ["You are not authorized!"] });
-  }
-
-  const decoded = jwt.decode(token);
-
-  if (decoded) {
-    req.userId = decoded._id;
-  }
-
-  next();
+  return res.status(403).send("Unauthorized");
 };
