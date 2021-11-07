@@ -51,8 +51,7 @@ function PostItem({ post }) {
           <PostLike post={post} user={user} />
           <PostSave post={post} />
         </div>
-
-        {likeText}
+        <p>{likeText}</p>
       </div>
 
       <div style={{ padding: "1rem" }}>

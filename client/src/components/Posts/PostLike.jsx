@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { FaRegComment } from "react-icons/fa";
 import { dislikePost, likePost } from "../../store/posts/likes";
+import "./styles/PostLike.css";
 
 function PostLike({ post, user }) {
   const dispatch = useDispatch();
@@ -22,16 +23,16 @@ function PostLike({ post, user }) {
   }, [history, post]);
 
   return (
-    <div>
+    <div className="post_like">
       {likedPost ? (
         <div style={{ display: "flex" }}>
           <AiFillHeart id="icon" onClick={handlePostDislike} />
-          <FaRegComment id="icon" onClick={goToPost} />
+          <FaRegComment id="icon" className="comment_icon" onClick={goToPost} />
         </div>
       ) : (
         <div style={{ display: "flex" }}>
           <AiOutlineHeart id="icon" onClick={handlePostLike} />
-          <FaRegComment id="icon" onClick={goToPost} />
+          <FaRegComment id="icon" className="comment_icon" onClick={goToPost} />
         </div>
       )}
     </div>

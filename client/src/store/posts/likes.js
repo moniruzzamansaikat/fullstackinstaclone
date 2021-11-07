@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authRequest } from "../../utils/xhr";
-import { setDislikePost, setLikePost } from "./posts";
 
 // like post
 export const likePost = createAsyncThunk(
