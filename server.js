@@ -30,7 +30,7 @@ const server = app.listen(PORT, () => {
 
 const io = new Server(8888, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://saikim.herokuapp.com/",
   },
 });
 require("./utils/messages")(io);

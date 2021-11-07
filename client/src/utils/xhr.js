@@ -1,15 +1,8 @@
 import Axios from "axios";
 
 export const xhr = Axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://saikim.herokuapp.com/api",
 });
-
-// export const authRequest = Axios.create({
-//   baseURL: "http://localhost:5000/api",
-//   headers: {
-//     Authorization: `bearer ${jwt_token}`,
-//   },
-// });
 
 /**
  *
@@ -18,7 +11,7 @@ export const xhr = Axios.create({
  */
 export const authRequest = (token) => {
   return Axios.create({
-    baseURL: "http://localhost:5000/api",
+    baseURL: "https://saikim.herokuapp.com/api",
     headers: {
       Authorization: `bearer ${token}`,
     },
