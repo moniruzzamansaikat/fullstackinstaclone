@@ -4,10 +4,14 @@ const Notification = require("../models/Notification");
 
 // get all notifications
 router.get("/", checkAuth, async (req, res) => {
-  const notifications = await Notification.find({ user: req.userId }).populate(
-    "notifUser"
-  );
-  res.json(notifications);
+  try {
+    const notifications = await Notification.find({
+      user: req.userId,
+    }).populate("notifUser");
+    return res.status(200).json(notifications);
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
 });
 
 // seen notificaiton
