@@ -1,8 +1,8 @@
 import React from "react";
 import Story from "./Story";
 import Slider from "react-slick";
-import "./styles/Stories.css";
 import AddStory from "./AddStory";
+import "./styles/Stories.css";
 
 function Stories() {
   const settings = {
@@ -36,7 +36,7 @@ function Stories() {
         breakpoint: 520,
         settings: {
           autoPlay: false,
-          slidesToShow: 5,
+          slidesToShow: 4,
           slidesToScroll: 3,
           arrows: false,
         },
