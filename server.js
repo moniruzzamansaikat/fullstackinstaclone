@@ -3,8 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const fileupload = require("express-fileupload");
 const { Server } = require("socket.io");
-const Message = require("./models/Message");
-const User = require("./models/User");
 
 const app = express();
 

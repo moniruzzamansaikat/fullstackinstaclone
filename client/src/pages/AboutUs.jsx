@@ -26,11 +26,10 @@ function AboutUs() {
 
       <main>
         <aside>
+          <h4>About Saikim</h4>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil cum
-            obcaecati cumque? Tenetur porro voluptatum quo accusantium
-            asperiores nisi deserunt veniam incidunt eius, nesciunt, non in
-            ipsam provident repellendus ipsa.
+            This website is created for demo purpose. The developer tried to
+            make a simple clone of instagram for his personal project.
           </p>
         </aside>
 
@@ -38,23 +37,11 @@ function AboutUs() {
           <h2>Welcome to saik.net</h2>
           <div className="content">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores,
-              deserunt?
+              This site was created for demo purspose only. The Deveoper tried
+              to make a simple clone of{" "}
+              <a href="https://instagram.com">Instagram</a>.
             </p>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis
-              ullam sint quo non quasi earum ratione eligendi dicta, velit
-              veniam qui, corporis in doloribus officia harum temporibus,
-              similique enim tempore consequatur consectetur expedita ipsa
-              asperiores? Unde rerum officia similique eos perferendis
-              reprehenderit obcaecati fugiat officiis, voluptates nulla numquam
-              vitae odio dolor odit nisi! Modi, ut. Id exercitationem eos
-              laudantium iure quam iste? Unde eius illo in eveniet ex quo ab,
-              architecto nihil? Commodi error neque, illo ullam minima, quod
-              possimus repellat quisquam repellendus, corrupti aliquid. Ducimus
-              eveniet quod possimus mollitia nihil tempora velit ex quam
-              officiis facere voluptas, modi consectetur.
-            </p>
+            <p>Used node.js, react.js, vanilla css, socket.io, mongodb.</p>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
               dignissimos rem totam dolorum nulla ipsa officiis est, quae,
