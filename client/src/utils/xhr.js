@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const xhr = Axios.create({
-  baseURL: "/api",
+  baseURL: "http://localhost:5000/api",
 });
 
 /**
@@ -11,7 +11,7 @@ export const xhr = Axios.create({
  */
 export const authRequest = (token) => {
   return Axios.create({
-    baseURL: "/api",
+    baseURL: "http://localhost:5000/api",
     headers: {
       Authorization: `bearer ${token}`,
     },
