@@ -30,7 +30,7 @@ function App() {
 
   // socket io
   useEffect(() => {
-    const socket = io.connect("https://saikim.herokuapp.com/");
+    const socket = io.connect("http://localhost:5000");
     if (user) {
       socket.emit("connect_user", user?._id);
       dispatch(setSocket(socket));
