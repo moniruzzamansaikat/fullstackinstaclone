@@ -9,7 +9,7 @@ import { checkAuthenticatinon, fetchNotifications } from "./store/auth/auth";
 import Meta from "./components/Meta";
 import MainLoader from "./components/Shared/MainLoader";
 import io from "socket.io-client";
-import { setActiveUsers, setSocket } from "./store/users/users";
+import { setActiveUsers } from "./store/users/users";
 import Notif from "./components/Shared/Notif";
 import "./App.css";
 
@@ -32,7 +32,7 @@ function App() {
 
   // socket io
   useEffect(() => {
-    socket = io.connect("http://localhost:5000");
+    socket = io.connect("https://saikim.herokuapp.com/");
     if (user) {
       socket.emit("connect_user", user?._id);
     }
