@@ -13,9 +13,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Messages from "../components/Messages/Messages";
 import SendMessage from "../components/Messages/SendMessage";
 import MessageUserHeader from "../components/Messages/MessageUserHeader";
-import Messenger from "../components/Messenger/Messenger";
-import "./styles/MessagesPage.css";
-import { socket } from "../App";
+import "./styles/messagesPage.css";
 
 function MessagesPage() {
   const dispatch = useDispatch();

@@ -34,7 +34,7 @@ function LoginPage() {
       <header>
         <div></div>
         <div className="site_info">
-          <p className="logo">[saik.net]</p>
+          <p className="logo">[saikim.net]</p>
           <ul className="menu">
             <li>
               <Link to="/login">login</Link>
