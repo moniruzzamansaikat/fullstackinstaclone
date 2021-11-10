@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "../../store/users/users";
 import "./styles/SendMessage.css";
+import { socket } from "../../App";
 
-function SendMessage({ socket, sender, receiverId }) {
+function SendMessage({ sender, receiverId }) {
   const [text, setText] = useState("");
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    socket.on("message", (data) => {
+      dispatch(addMessage(data));
+      if (user?._id !== data.sender) {
+        // playAlert();
+      }
+    });
+  }, [dispatch, user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

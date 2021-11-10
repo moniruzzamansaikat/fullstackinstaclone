@@ -8,6 +8,7 @@ import {
   AiOutlineSave,
 } from "react-icons/ai";
 import { FaRegUserCircle } from "react-icons/fa";
+import { FiUsers } from "react-icons/fi";
 import { Link, withRouter, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../store/auth/auth";
@@ -65,6 +66,10 @@ function NavItems() {
           <Link to="/saved">
             <AiOutlineSave />
             <span>Saved</span>
+          </Link>
+          <Link to="/suggestions">
+            <FiUsers />
+            <span>Suggested Users</span>
           </Link>
           <Link to="/settings">
             <BsGear />

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MainLayout from "../components/Layouts/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import UserCard from "../components/Shared/UserCard";
 import {
+  addMessage,
   fetchFollowing,
   fetchInboxUser,
   fetchMessages,
@@ -12,16 +13,30 @@ import { useHistory, useParams } from "react-router-dom";
 import Messages from "../components/Messages/Messages";
 import SendMessage from "../components/Messages/SendMessage";
 import MessageUserHeader from "../components/Messages/MessageUserHeader";
+import Messenger from "../components/Messenger/Messenger";
 import "./styles/MessagesPage.css";
+import { socket } from "../App";
 
 function MessagesPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
-  const { inboxUser, socket, activeUsers } = useSelector(
+  const [message, setMessage] = useState("");
+  const { inboxUser, activeUsers, followers } = useSelector(
     (state) => state.users
   );
   const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(addMessage(message));
+    setMessage("");
+  }, [message, dispatch]);
+
+  useEffect(() => {
+    socket.on("message", (data) => {
+      setMessage(data);
+    });
+  }, []);
 
   useEffect(() => {
     socket.on("active_users", (users) => {
@@ -48,7 +63,7 @@ function MessagesPage() {
   return (
     <MainLayout>
       <div className="messages_page">
-        <div className="users_list">
+        {/* <div className="users_list">
           <header style={{ borderBottom: "1px solid" }}>
             <UserCard inHeader={true} user={user} />
           </header>
@@ -82,7 +97,9 @@ function MessagesPage() {
           <div className="empty_chat">
             <h2>Select a conversation to chat...</h2>
           </div>
-        )}
+        )} */}
+
+        <Messenger users={followers} inboxUser={inboxUser} />
       </div>
     </MainLayout>
   );

@@ -7,6 +7,7 @@ const initialState = {
   posts: [],
   profilePosts: [],
   savedPosts: [],
+  fetchingPosts: false,
   singlePost: null,
   openDropdownMenu: false,
   dropdownedPost: null,
@@ -104,10 +105,15 @@ export const removeFromSaved = createAsyncThunk(
 export const fetchPosts = createAsyncThunk(
   "pots/fetchPosts",
   async (_, { dispatch, getState }) => {
+    dispatch(setFetchingPosts(true));
+
     try {
       const { data } = await authRequest(getState().auth.token)("/posts");
       dispatch(setPosts(data));
-    } catch (error) {}
+      dispatch(setFetchingPosts(false));
+    } catch (error) {
+      dispatch(setFetchingPosts(false));
+    }
   }
 );
 
@@ -179,6 +185,10 @@ const posts = createSlice({
       state.posts = payload;
     },
 
+    setFetchingPosts: (state, { payload }) => {
+      state.fetchingPosts = payload;
+    },
+
     removePost: (state, { payload }) => {
       state.posts = state.posts.filter((post) => post._id !== payload);
     },
@@ -211,6 +221,7 @@ export const {
   addPost,
   setCreatingPost,
   setPosts,
+  setFetchingPosts,
   removePost,
   setCreatedPost,
   setOpenDropdownMenu,

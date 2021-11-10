@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
     members: { $all: [userId, receiverId] },
   });
 
+  console.log(messages);
   res.json(messages);
 });
 

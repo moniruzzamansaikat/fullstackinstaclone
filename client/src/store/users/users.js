@@ -212,7 +212,7 @@ const usersSlice = createSlice({
     },
 
     addMessage: (state, { payload }) => {
-      state.messages.push(payload);
+      state.messages = [...state.messages, payload];
     },
 
     setActiveUsers: (state, { payload }) => {

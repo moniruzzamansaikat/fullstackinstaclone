@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserData } from "../../store/auth/auth";
+import { setUser, updateUserData } from "../../store/auth/auth";
+import GenderSelection from "../Shared/GenderSelection";
 import "./styles/UserDataSetting.css";
 
 function UserDataSetting({ user }) {
@@ -12,8 +13,15 @@ function UserDataSetting({ user }) {
     name: user.name,
     email: user.email,
     bio: user.bio || "",
+    gender: user?.gender || "",
   }));
 
+  // set user gender
+  const setGender = (genderValue) => {
+    setUserData((data) => ({ ...data, gender: genderValue }));
+  };
+
+  // handle profile photo upload
   const handleFileChange = (e) => {
     const url = URL.createObjectURL(e.target.files[0]);
     setFile({
@@ -25,7 +33,7 @@ function UserDataSetting({ user }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      file
+      file?.file
         ? updateUserData({
             name: userData.name,
             email: userData.email,
@@ -36,6 +44,7 @@ function UserDataSetting({ user }) {
             name: userData.name,
             email: userData.email,
             bio: userData.bio,
+            gender: userData.gender,
           })
     );
   };
@@ -75,6 +84,9 @@ function UserDataSetting({ user }) {
             value={userData.bio}
             onChange={(e) => setUserData({ ...userData, bio: e.target.value })}
           />
+        </div>
+        <div className="input_div">
+          <GenderSelection gender={userData.gender} setGender={setGender} />
         </div>
         <div className="input_div">
           <label>Profile Photo</label>

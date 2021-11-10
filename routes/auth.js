@@ -14,6 +14,17 @@ router.get("/check", checkAuth, async (req, res) => {
   return res.status(403).send("Unauthorized");
 });
 
+// logut user
+router.post("/logout", checkAuth, async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.userId, {
+    $set: {
+      lastLogin: new Date(),
+    },
+  });
+
+  res.send("You are logged out!");
+});
+
 // register
 router.post("/register", async (req, res) => {
   try {
@@ -78,11 +89,9 @@ router.post("/login", async (req, res) => {
 
 // update user data
 router.put("/update", checkAuth, async (req, res) => {
-  const { name, email, bio } = req.body;
+  const { name, email, bio, gender } = req.body;
+  console.log({ gender });
   const errors = [];
-
-  if (name.trim().length === 0) errors.push("Name is required");
-  if (email.trim().length === 0) errors.push("Email is required");
 
   const anotherUserFound = await User.findOne({ email });
 
@@ -116,6 +125,7 @@ router.put("/update", checkAuth, async (req, res) => {
           name,
           email,
           bio,
+          gender,
         },
       },
       {
@@ -129,6 +139,35 @@ router.put("/update", checkAuth, async (req, res) => {
       token,
     });
   }
+});
+
+// update contact info
+router.put("/contact", checkAuth, async (req, res) => {
+  const { homeTown, currentCity, highSchool, relation, birthday } = req.body;
+  const errors = [];
+  if (!homeTown.trim().length) errors.push("Home town is required!");
+  if (!currentCity.trim().length) errors.push("Current city is required!");
+  if (!highSchool.trim().length) errors.push("High school is required!");
+  if (!relation.trim().length) errors.push("Relationship is required!");
+  if (!birthday?.trim().length) errors.push("Date of birth is required!");
+
+  const user = await User.findByIdAndUpdate(
+    req.userId,
+    {
+      $set: {
+        homeTown,
+        currentCity,
+        highSchool,
+        relation,
+        birthday,
+      },
+    },
+    {
+      new: true,
+    }
+  );
+
+  res.json(user);
 });
 
 module.exports = router;

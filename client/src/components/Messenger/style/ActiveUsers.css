@@ -1,0 +1,26 @@
+.active_users {
+}
+
+.active_users header {
+  background-color: var(--primary-color);
+  color: #f0f0f0;
+  padding: 5px;
+}
+
+.active_users header h4 {
+  margin: 0;
+}
+
+.active_users .none_online {
+  text-align: center;
+}
+
+.active_users .none_online p {
+  font-size: 1.6rem;
+}
+
+.active_users .none_online p .sad_icon {
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: -6px;
+}

@@ -12,7 +12,11 @@
 }
 
 @media (max-width: 520px) {
+  .nav_item {
+    margin: 0 7px;
+  }
+
   .nav_item .icon {
-    font-size: 18px;
+    font-size: 1.3rem;
   }
 }

@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const fileupload = require("express-fileupload");
 const { Server } = require("socket.io");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -11,6 +12,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({}));
 app.use(cors());
 app.use(fileupload({}));
+
+// dev middlewares
+if (app.get("env") === "development") {
+  app.use(morgan("short"));
+}
 
 // routes
 app.use("/api", require("./routes"));

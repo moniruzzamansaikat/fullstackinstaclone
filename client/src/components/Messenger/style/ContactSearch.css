@@ -1,0 +1,28 @@
+.contact_search form {
+  display: flex;
+  margin-bottom: 13px;
+}
+
+.contact_search input {
+  width: 100%;
+  border: 0;
+  border: 2px solid var(--primary-color);
+  outline: unset;
+  padding: 5px 10px;
+  flex: 10;
+  border-radius: 30px;
+}
+
+.contact_search button {
+  padding: 5px 8px;
+  margin-left: 10px;
+  border: 0;
+  border-radius: 50%;
+  outline: 0;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

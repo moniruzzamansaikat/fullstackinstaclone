@@ -30,3 +30,14 @@
 .comment_item small:first-child {
   margin-left: 0;
 }
+
+.comment_item .comment_actions {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.comment_item .comment_actions small:last-child {
+  margin-bottom: -5px;
+  cursor: pointer;
+}

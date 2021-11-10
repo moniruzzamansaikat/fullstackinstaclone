@@ -28,7 +28,7 @@ const postsExtraReducers = (builder) => {
 
     // like post
     .addCase(likePost.fulfilled, (state, { payload }) => {
-      if (payload.postId === state.singlePost._id) {
+      if (payload.postId === state?.singlePost?._id) {
         state.singlePost.likes.push(payload.data);
       }
 
@@ -43,7 +43,7 @@ const postsExtraReducers = (builder) => {
 
     // dislike post
     .addCase(dislikePost.fulfilled, (state, { payload }) => {
-      if (payload.postId === state.singlePost._id) {
+      if (payload.postId === state?.singlePost?._id) {
         state.singlePost.likes = state.singlePost.likes.filter(
           (like) => like?._id !== payload?.data?._id
         );

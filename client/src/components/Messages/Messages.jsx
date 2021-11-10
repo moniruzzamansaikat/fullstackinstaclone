@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from "../../store/users/users";
 import MessageItem from "./MessageItem";
 import audio from "../../images/alert.wav";
+import { socket } from "../../App";
 
 function Messages({ inboxUser }) {
-  const { socket } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const { messages } = useSelector((state) => state.users);
   const { user } = useSelector((state) => state.auth);
@@ -24,26 +24,15 @@ function Messages({ inboxUser }) {
     }
   };
 
-  useEffect(() => {
-    socket.on("message", (data) => {
-      dispatch(addMessage(data));
-      if (user?._id !== data.sender) {
-        playAlert();
-      }
-    });
-  }, [dispatch, socket, user]);
-
   return (
-    <section>
+    <section style={{ display: "block" }}>
       <audio ref={audioRef} src={audio}></audio>
 
-      {messages
-        .filter((msg) => msg.members.includes(inboxUser?._id))
-        ?.map((message) => (
-          <div ref={scrollRef} key={message._id}>
-            <MessageItem inboxUser={inboxUser} message={message} user={user} />
-          </div>
-        ))}
+      {messages.map((message, index) => (
+        <div ref={scrollRef} index={index}>
+          <MessageItem inboxUser={inboxUser} message={message} user={user} />
+        </div>
+      ))}
     </section>
   );
 }
