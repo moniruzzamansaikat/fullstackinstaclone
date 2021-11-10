@@ -20,6 +20,9 @@ if (app.get("env") === "development") {
 
 // routes
 app.use("/api", require("./routes"));
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/client/build/index.html");
+});
 
 const PORT = process.env.PORT || 5000;
 
