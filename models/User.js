@@ -20,6 +20,13 @@ const UserSchema = new Schema({
   following: [{ type: Types.ObjectId, ref: "User" }],
   posts: [{ type: Types.ObjectId, ref: "Post" }],
   saved: [{ type: Types.ObjectId, ref: "Post" }],
+  lastLogin: { type: Date },
+  homeTown: { type: String, default: "" },
+  currentCity: { type: String, default: "" },
+  highSchool: { type: String, default: "" },
+  relation: { type: String, default: "" },
+  gender: { type: String, default: "" },
+  birthday: { type: Date },
 });
 
 UserSchema.plugin(timeStamp);

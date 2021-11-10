@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TimeAgo from "../Shared/TimeAgo";
+import LikeComment from "./LikeComment";
 import "./styles/SinglePostComment.css";
 
 function SingePostComment({ comment }) {
@@ -12,11 +13,12 @@ function SingePostComment({ comment }) {
           <Link to={`/profile/${comment.user._id}`}>{comment.user.name}</Link>
           <p>{comment.text} </p>
         </div>
-        <div>
+        <div className="comment_actions">
           <small>
             <TimeAgo time={comment?.createdAt || Date.now()} />
           </small>
           <small>{comment.likes} likes</small>
+          <LikeComment />
         </div>
       </div>
     </div>

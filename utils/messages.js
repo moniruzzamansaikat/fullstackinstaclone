@@ -57,8 +57,6 @@ module.exports = function (io) {
             text,
           },
           (message) => {
-            console.log(message);
-            io.to(senderUser?.socketId).emit("message", message);
             io.to(user.socketId).emit("message", message);
           }
         );

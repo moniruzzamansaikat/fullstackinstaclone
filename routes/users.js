@@ -22,7 +22,9 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     res.json(user);
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).send("User not found!");
+  }
 });
 
 // follow user

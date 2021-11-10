@@ -1,0 +1,45 @@
+.messenger {
+  min-height: 500px;
+}
+
+.messenger header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.messenger header button {
+  width: 100%;
+  padding: 8px 10px;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  font-size: 1.2rem;
+  background-color: var(--primary-color);
+  color: #f0f0f0;
+}
+
+.messenger header button:first-child {
+  border-right: 0;
+}
+
+.messenger header button:hover {
+  opacity: 0.8;
+}
+
+.messenger section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 520px) {
+  .messenger section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.messenger section .box {
+  padding: 12px;
+  background-color: rgb(255, 255, 255);
+  overflow-y: auto;
+  max-height: 500px;
+}

@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { FaRegComment } from "react-icons/fa";
+import { VscComment } from "react-icons/vsc";
 import { dislikePost, likePost } from "../../store/posts/likes";
 import "./styles/PostLike.css";
 
@@ -27,12 +27,12 @@ function PostLike({ post, user }) {
       {likedPost ? (
         <div style={{ display: "flex" }}>
           <AiFillHeart id="icon" onClick={handlePostDislike} />
-          <FaRegComment id="icon" className="comment_icon" onClick={goToPost} />
+          <VscComment id="icon" className="comment_icon" onClick={goToPost} />
         </div>
       ) : (
         <div style={{ display: "flex" }}>
           <AiOutlineHeart id="icon" onClick={handlePostLike} />
-          <FaRegComment id="icon" className="comment_icon" onClick={goToPost} />
+          <VscComment id="icon" className="comment_icon" onClick={goToPost} />
         </div>
       )}
     </div>

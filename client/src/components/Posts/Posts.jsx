@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 import "./styles/Posts.css";
 
 function Posts() {
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, fetchingPosts } = useSelector((state) => state.posts);
+
+  if (fetchingPosts) {
+    return <h3>Loading posts...</h3>;
+  }
 
   return (
     <div>

@@ -18,7 +18,8 @@ router.get("/", checkAuth, async (req, res) => {
   // filter posts for following users only
   posts = posts.filter(
     (post) =>
-      post.user.followers.includes(req.userId) || post.user._id === req.userId
+      post.user.followers.includes(req.userId) ||
+      String(post.user._id) === req.userId
   );
   res.json(posts);
 });

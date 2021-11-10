@@ -8,6 +8,9 @@ function AddComment({ postId }) {
   const [text, setText] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!text.trim().length) {
+      return;
+    }
     dispatch(addComment({ postId, text }));
     setText("");
   };

@@ -6,6 +6,7 @@ const initialState = {
   user: null,
   fetchingUser: false,
   updatingUserData: false,
+  updatingContactInfo: false,
   notifications: [],
   errors: [],
 };
@@ -49,6 +50,7 @@ export const updateUserData = createAsyncThunk(
   async (updateData, { dispatch, getState }) => {
     try {
       dispatch(setUpdatingUserData(true));
+      console.log(updateData);
 
       const formData = new FormData();
       Object.keys(updateData).forEach((key) => {
@@ -87,7 +89,6 @@ export const registerUser = createAsyncThunk(
         data: userData,
       });
 
-      console.log(data);
       dispatch(setToken(data.token));
       dispatch(setUser(data.user));
     } catch (error) {
@@ -123,8 +124,10 @@ export const checkAuthenticatinon = createAsyncThunk(
     dispatch(setFetchingUser(true));
 
     try {
-      if (token) {
-        const { data } = await authRequest(token)("/auth/check");
+      if (getState().auth.token) {
+        const { data } = await authRequest(getState().auth.token)(
+          "/auth/check"
+        );
         dispatch(setUser(data));
         dispatch(setFetchingUser(false));
       } else {
@@ -134,6 +137,29 @@ export const checkAuthenticatinon = createAsyncThunk(
     } catch (error) {
       const { data: reason } = error.response;
       dispatch(setFetchingUser(false));
+    }
+  }
+);
+
+// update contact info
+export const updateContactInfo = createAsyncThunk(
+  "auth/updateContactInfo",
+  async (state, { dispatch, getState }) => {
+    dispatch(setUpdatingCotactInfo(true));
+    try {
+      const { data } = await authRequest(getState().auth.token)(
+        "/auth/contact",
+        {
+          method: "PUT",
+          data: state,
+        }
+      );
+      dispatch(setUpdatingCotactInfo(false));
+      console.log(data);
+    } catch (error) {
+      const { data: reason } = error.response;
+      dispatch(setUpdatingCotactInfo(false));
+      console.error(reason);
     }
   }
 );
@@ -195,6 +221,10 @@ const auth = createSlice({
     setErrors: (state, { payload }) => {
       state.errors = payload;
     },
+
+    setUpdatingCotactInfo: (state, { payload }) => {
+      state.updatingContactInfo = payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -220,5 +250,6 @@ export const {
   removeSavedPost,
   removeFollowId,
   setErrors,
+  setUpdatingCotactInfo,
 } = auth.actions;
 export default auth.reducer;

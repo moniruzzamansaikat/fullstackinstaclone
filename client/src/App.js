@@ -9,9 +9,11 @@ import { checkAuthenticatinon, fetchNotifications } from "./store/auth/auth";
 import Meta from "./components/Meta";
 import MainLoader from "./components/Shared/MainLoader";
 import io from "socket.io-client";
-import { setActiveUsers, setSocket } from "./store/users/users";
+import { setActiveUsers } from "./store/users/users";
 import Notif from "./components/Shared/Notif";
 import "./App.css";
+
+export let socket;
 
 function App() {
   const dispatch = useDispatch();
@@ -30,10 +32,9 @@ function App() {
 
   // socket io
   useEffect(() => {
-    const socket = io.connect("https://saikim.herokuapp.com/");
+    socket = io.connect("https://saikim.herokuapp.com/");
     if (user) {
       socket.emit("connect_user", user?._id);
-      dispatch(setSocket(socket));
     }
 
     socket.on("active_users", (users) => {
