@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser, updateUserData } from "../../store/auth/auth";
+import { updateUserData } from "../../store/auth/auth";
 import GenderSelection from "../Shared/GenderSelection";
 import "./styles/UserDataSetting.css";
 

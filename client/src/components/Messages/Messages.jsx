@@ -1,12 +1,9 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addMessage } from "../../store/users/users";
+import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import MessageItem from "./MessageItem";
 import audio from "../../images/alert.wav";
-import { socket } from "../../App";
 
 function Messages({ inboxUser }) {
-  const dispatch = useDispatch();
   const { messages } = useSelector((state) => state.users);
   const { user } = useSelector((state) => state.auth);
   const scrollRef = useRef();
@@ -15,14 +12,6 @@ function Messages({ inboxUser }) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  const playAlert = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      audioRef.current.play();
-    }
-  };
 
   return (
     <section style={{ display: "block" }}>

@@ -40,6 +40,7 @@ export const seenNotification = createAsyncThunk(
       return data;
     } catch (error) {
       const { data: reason } = error.response;
+      console.log(reason);
     }
   }
 );
@@ -50,7 +51,6 @@ export const updateUserData = createAsyncThunk(
   async (updateData, { dispatch, getState }) => {
     try {
       dispatch(setUpdatingUserData(true));
-      console.log(updateData);
 
       const formData = new FormData();
       Object.keys(updateData).forEach((key) => {
@@ -136,6 +136,7 @@ export const checkAuthenticatinon = createAsyncThunk(
       }
     } catch (error) {
       const { data: reason } = error.response;
+      console.log(reason);
       dispatch(setFetchingUser(false));
     }
   }

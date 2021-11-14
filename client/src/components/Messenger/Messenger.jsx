@@ -13,28 +13,31 @@ import { authRequest } from "../../utils/xhr";
 import "./style/Messenger.css";
 
 function Messenger({ inboxUser }) {
-  const { user, token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const { followers, following, socket } = useSelector((state) => state.users);
-  const [conversation, setConversation] = useState(null);
+  const [setConversation] = useState(null);
 
   const dispatch = useDispatch();
 
   // fetch conversation
-  useEffect((token) => {
-    authRequest()("/conversations/get", {
-      method: "POST",
-      data: {
-        members: [inboxUser?._id, user?._id],
-      },
-    })
-      .then(({ data }) => {
-        console.log(data);
-        setConversation(data);
+  useEffect(
+    (token) => {
+      authRequest()("/conversations/get", {
+        method: "POST",
+        data: {
+          members: [inboxUser?._id, user?._id],
+        },
       })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
-  }, []);
+        .then(({ data }) => {
+          console.log(data);
+          setConversation(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    [inboxUser, user, setConversation]
+  );
 
   // fetch followers  & followings
   useEffect(() => {

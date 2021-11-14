@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { ImCross, ImWikipedia } from "react-icons/im";
+import { ImCross } from "react-icons/im";
 import { BsUpload } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { setPhotos, setUploadingPhotos } from "../../store/photos/photos";
