@@ -15,7 +15,7 @@ app.use(fileupload({}));
 
 // routes
 app.use("/api", require("./routes"));
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/client/build/index.html");
 });
 
@@ -28,7 +28,7 @@ const server = app.listen(PORT, () => {
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://saikim.herokuapp.com/",
   },
 });
 require("./utils/messages")(io);
